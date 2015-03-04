@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+    <head>
+        <title>第20课-margin重叠现象研究</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style>
+            #test1 {
+                height: 100px;
+                background: blue;
+                margin-bottom: 50px;
+            }
+            #test2 {
+                height: 100px;
+                background: green;
+                margin-top: 50px;
+            }
+            #father {
+                height: 100px;
+                background: green;
+                margin-bottom: 50px
+            }
+            #son {
+                width: 80px;
+                height: 100px;
+                background: blue;
+                margin: 0px auto;
+                margin-bottom: 50px
+            }
+            #contrast {
+                height: 100px;
+                background: green;
+                margin-top: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        margin重叠1：
+        相邻的普通元素，上下边距并非简单的相加，而是取其中较大的值。
+        <div id="test1"></div>
+        <div id="test2"></div>
+
+        <br>
+        margin重叠2：
+        父子元素之间，上下边距并非简单的相加，而是取其中较大的值。
+        <div id="father">
+            <div id="son"></div>
+        </div>
+        <div id="contrast"></div>
+    </body>
+</html>
+
