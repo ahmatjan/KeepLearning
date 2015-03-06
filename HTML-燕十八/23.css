@@ -1,0 +1,8 @@
+@import url('23-2.css');
+
+#test {
+    width: 200px;
+    height: 200px;
+    background: orange;
+}
+/* CSS引入方式3 */

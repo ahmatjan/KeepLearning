@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+    <head>
+        <title>第29课-CSS优先级</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style>
+            div #id1 {
+                color: brown;
+            }
+
+            #id1 {
+                color: orange;
+            }
+
+            .class1 {
+                color: blue;
+            }
+
+            p {
+                color: red;
+            }
+
+            div {
+                color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <p id="id1" class="class1">赋得古原草送别</p>
+        </div>
+    </body>
+</html>
+<!-- 总结： -->
+    <!-- 选择器的指定范围越小，优先级越高。 -->
