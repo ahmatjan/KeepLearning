@@ -1,0 +1,9 @@
+#define IDC_STATIC		-1
+#define IDD_MAIN 		1
+#define IDC_TEXT		2
+#define IDC_NUMBER		3
+#define IDC_LIST		4
+#define IDC_ADD			5
+#define IDC_REMOVE		6
+#define IDC_CLEAR		7
+#define IDC_SHOWCOUNT	8

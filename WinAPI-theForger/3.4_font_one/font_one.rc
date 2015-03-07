@@ -1,0 +1,19 @@
+#include <windows.h>
+#include "resource.h"
+
+IDR_MENU MENU DISCARDABLE
+BEGIN
+	POPUP "&File"
+	BEGIN
+		MENUITEM "E&xit",					ID_FILE_EXIT
+	END
+	POPUP "F&ormat"
+	BEGIN
+		MENUITEM "&Font...", 				ID_FORMAT_FONT
+		MENUITEM "Default GUI Font",		ID_FORMAT_DEFAULTGUIFONT
+		MENUITEM "Times New Roman (12pt, Italics)", 	ID_FORMAT_TEST
+		MENUITEM SEPARATOR
+		MENUITEM "&Background Color...", 	ID_FORMAT_BACKGROUNDCOLOR
+		MENUITEM "&Opaque",					ID_FORMAT_OPAQUE
+	END
+END
