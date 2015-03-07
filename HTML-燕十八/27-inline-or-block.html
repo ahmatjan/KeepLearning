@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+    <head>
+        <title>第35课 图片是内联还是块状？</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style>
+            div {
+                height: 200px;
+                border: 2px solid red;
+                clear: left;
+            }
+
+            img {
+                jisplay: block;
+                margin: 0px;
+                float: left;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="small.jpg" alt=""/>
+        <img src="small.jpg" alt=""/>
+        <div id="test"></div>
+    </body>
+</html>
+<!-- 总结： -->
+    <!-- img标签是特殊的内联元素，称之为替换元素(replaced element),可以设置宽高以及有一定的magin值。 -->
+    <!-- 通常先把img 声明为block，再进行使用。 -->
