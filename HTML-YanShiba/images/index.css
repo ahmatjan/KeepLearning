@@ -167,6 +167,7 @@
     clear: both;
     width: 0px;
     height: 0px;
+    overflow: hidden;   /*用来解决IE小像素div出现的bug*/
 }
 
 #footer ul {
