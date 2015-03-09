@@ -1,0 +1,36 @@
+public class HelloWorld
+{
+	static public void main(String args[])
+	{
+		int i;
+		String greetings[] =
+		{
+			"Hellow world!",
+			"I am a robot.",	
+			"Nice to meet you~"
+		};
+
+		i = 0;
+		while (i < 4)
+		{
+			try
+			{
+				System.out.println(greetings[i]);
+			}
+/*			catch (ArrayIndexOutOfBoundsException e)
+			{
+				System.out.println("Resetting Index Value");
+				i  = -1;
+			}
+*/			catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+			finally
+			{
+				System.out.println("This is always printed.");
+			}
+			i++;
+		}
+	}
+}

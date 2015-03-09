@@ -1,0 +1,40 @@
+abstract class ObjectStorage
+{
+	int objectNum = 0;
+	Object storage[] = new Object[100];
+
+	abstract void put(Object o);
+	abstract Object get();
+}
+
+class Stack extends ObjectStorage
+{
+	public void put(Object o)
+	{
+		storage[objectNum++] = o;
+	}
+
+	public Object get()
+	{
+		return storage[--objectNum];
+	}
+}
+
+class Queue extends ObjectStorage
+{
+	private int front = 0;
+	private int tail = 0;
+
+	public void put(Object o)
+	{
+		storage[front++] = o;
+		objectNum++;
+	}
+
+	public Object get()
+	{
+		objectNum--;	
+		return storage[tail++];
+	}
+}
+

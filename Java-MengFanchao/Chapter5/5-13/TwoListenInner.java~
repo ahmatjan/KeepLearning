@@ -1,0 +1,25 @@
+import java.awt.*; 
+import java.awt.event.*;
+
+public class TwoListenInner
+{
+	private Frame f;
+	private TextField tf;
+
+	static public void main(String args[])
+	{
+		TwoListenInner that = new TwoListenInner();
+
+		that.go();
+	}
+
+	public void go()
+	{
+		f = new Frame("Two listeners example");
+		f.add("North", new Label("click and drag the mouse"));
+		tf = new TextField(30);
+		f.add("South", tf);
+		f.setSize(300, 200);
+		f.setVisible(true);
+	}		
+}
