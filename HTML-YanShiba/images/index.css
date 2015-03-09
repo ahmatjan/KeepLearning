@@ -62,6 +62,12 @@
     margin: 10px;
     float: left;
     background: #EEE;
+    _display: inline;
+    /*
+     * _display来修复IE6 bug，保证兼容性：
+     *      IE6左浮元素，左margin是定义的两倍。
+     *      IE6右浮元素，右margin是定义的两倍。
+     */
 }
 
 .four h2 {
