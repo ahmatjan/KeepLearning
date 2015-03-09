@@ -1,83 +1,122 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
     <head>
-        <title>第8课-实战首页布局</title>
+        <title>首页实战</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <style>
-            #container {
-                width: 1000px;
-                background: grey;
-                margin: auto auto;
-            }
-
-            #header {
-                height: 120px;
-                background: green;
-            }
-
-            #main {
-                height: 600px;
-                background: blue;
-            }
-
-            #lside {
-                height: 600px;
-                width: 700px;
-                float: left;
-                background: brown;
-            }
-
-            .four {
-                width:310px;
-                height: 260px;
-                float: left;
-                background: white;
-                margin: 10px;
-                padding: 10px;
-            }
-
-            #rside {
-                height: 600px;
-                width: 300px;
-                float: right;
-                background: purple;
-            }
-
-            #top {
-                height: 400px;
-                background: orange;
-            }
-
-            #bottom {
-                height: 200px;
-                background: pink;
-            }
-
-            #footer {
-                height: 120px;
-                background: red;
-            }
-        </style>
+        <link rel="stylesheet" href="./images/reset.css" />
+        <link rel="stylesheet" href="./images/index.css" />
     </head>
-
     <body>
         <div id="container">
-            <div id="header"></div>
+            <div id="header">
+                <img src="./images/logo.jpg" alt="布尔教育"/>
+                <ul id="nav">
+                    <li><a href="#">导航1</a></li>
+                    <li><a href="#">导航2</a></li>
+                    <li><a href="#">导航3</a></li>
+                    <li><a href="#">导航4</a></li>
+                    <li><a href="#">导航5</a></li>
+                    <li><a href="#">导航6</a></li>
+                    <li><a href="#">导航7</a></li>
+                </ul>
+            </div>
+            <img src="images/about_banner.jpg" alt="" id="banner"/>
             <div id="main">
                 <div id="lside">
-                    <div class="four">首先，现代社会中对某个声音产生异见，这是正常的。如果一边倒认为某个意见只有对没有错，反而是不正常的。其次，我自己认为，并不是对柴静的所有质疑都是合理的。甚至，对她的大部分质疑都是不合理的。</div>
-                    <div class="four">首先，现代社会中对某个声音产生异见，这是正常的。如果一边倒认为某个意见只有对没有错，反而是不正常的。其次，我自己认为，并不是对柴静的所有质疑都是合理的。甚至，对她的大部分质疑都是不合理的。</div>
-                    <div class="four">首先，现代社会中对某个声音产生异见，这是正常的。如果一边倒认为某个意见只有对没有错，反而是不正常的。其次，我自己认为，并不是对柴静的所有质疑都是合理的。甚至，对她的大部分质疑都是不合理的。</div>
-                    <div class="four">首先，现代社会中对某个声音产生异见，这是正常的。如果一边倒认为某个意见只有对没有错，反而是不正常的。其次，我自己认为，并不是对柴静的所有质疑都是合理的。甚至，对她的大部分质疑都是不合理的。</div>
+                    <div class="subtitle">
+                        <img src="images/circle.gif" alt=""/>
+                        <h1>核心业务</h1>
+                        <a href="#">MORE&gt;&gt;</a>
+                    </div>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/eshop_service.jpg" alt=""/>
+                        <ul>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                        </ul>
+                    </div>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/eshop_service.jpg" alt=""/>
+                        <ul>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                        </ul>
+                    </div>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/eshop_service.jpg" alt=""/>
+                        <ul>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                        </ul>
+                    </div>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/eshop_service.jpg" alt=""/>
+                        <ul>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                            <li><a href="#">方便的订单管理</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div id="rside">
-                    <div id="top"></div>
-                    <div id="bottom"></div>
+                    <div class="subtitle">
+                        <img src="images/circle.gif" alt=""/>
+                        <h1>文章观点</h1>
+                        <a href="#">MORE&gt;&gt;</a>
+                    </div>
+                    <ul id="art">
+                        <li><a href="#"></a></li>
+                        <li><a href="#">文章1</a></li>
+                        <li><a href="#">文章2</a></li>
+                        <li><a href="#">文章3</a></li>
+                        <li><a href="#">文章4</a></li>
+                        <li><a href="#">文章5</a></li>
+                        <li><a href="#">文章6</a></li>
+                    </ul>
+
+                    <div class="subtitle">
+                        <img src="images/circle.gif" alt=""/>
+                        <h1>联系我们</h1>
+                        <a href="#">MORE&gt;&gt;</a>
+                    </div>
+                    <div id="contact">
+                        电话：0603-8888888<br>
+                        手机：130 0000 0000<br>
+                        地址：山东省威海市<br>
+                        E-mail： xxxx@163.com<br>
+                    </div>
                 </div>
+                <div class="clr"></div>
             </div>
-            <div id="footer"></div>
+            <div id="footer">
+                <ul>
+                    <li><a href="#">网站地图</a></li>
+                    <li><a href="#">网站地图</a></li>
+                    <li><a href="#">网站地图</a></li>
+                    <li><a href="#">网站地图</a></li>
+                    <li><a href="#">网站地图</a></li>
+                    <li><a href="#">网站地图</a></li>
+                </ul>
+                <address>
+                    &copy;2006-2009 北京市灵犀慧通科技有限公司 版权所有 http://www.lionhit.com 京ICP备07020337号
+                </address>
+            </div>
         </div>
     </body>
 </html>
-
