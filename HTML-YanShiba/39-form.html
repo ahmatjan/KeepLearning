@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+    <head>
+        <title>第55课 表单</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <body>
+        <pre>
+            在需要提交数据给服务器的场合，如注册、在线报名等场合，
+            需要用到form标签。
+        </pre>
+        <form action="http://www.baidu.com" method="post">
+            <p>
+                用户名：
+                <input type="text" name="username" value="ZhangSan">
+            </p>
+            <p>
+                密码：
+                <input type="password" name="password">
+            </p>
+            <p>
+                性别：
+                <input type="radio" name="gender" value="male" checked="checked">男
+                <input type="radio" name="gender" value="female">女
+            </p>
+            <p>
+                爱好：
+                <input type="checkbox" name="hobby" value="basketball" checked="checked">篮球
+                <input type="checkbox" name="hobby" value="football">足球
+                <input type="checkbox" name="hobby" value="billiards" checked="checked">台球
+                <input type="checkbox" name="hobby" value="junk">混球
+            </p>
+            <p>
+                学历：
+                <select name="diploma">
+                    <option value="bachelor">本科</option>
+                    <option value="senior_high_school" selected="selected">高中</option>
+                    <option value="junior_high_school">初中</option>
+                </select>
+            </p>
+            <p>
+                简介：
+                <textarea name="intro">I am from China.</textarea>
+            </p>
+            <p>
+                头像：
+                <input type="file" name="pic">
+            </p>
+            <p>
+                隐藏域：
+                <input type="hidden" name="IP" value="192.168.1.1">
+            </p>
+            <p>
+                <input type="submit" value="提交">
+            </p>
+        </form>
+    </body>
+</html>
+

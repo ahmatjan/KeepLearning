@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+    <head>
+        <title>第53课 相对定位与绝对定位</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style type="text/css" media="screen">
+            #test1 {
+                width: 300px;
+                height: 300px;
+                background: orange;
+            }
+
+            #test11 {
+                width: 100px;
+                height: 100px;
+                background: black;
+                position: relative;
+                top: 20px;
+                left: 20px;
+            }
+
+            #test12 {
+                width: 100px;
+                height: 100px;
+                background: gray;
+            }
+
+            #test2 {
+                width: 300px;
+                height: 300px;
+                background: brown;
+                position: relative;
+            }
+            #test21 {
+                width: 100px;
+                height: 100px;
+                background: black;
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                z-index: 1002;
+            }
+
+            #test22 {
+                width: 100px;
+                height: 100px;
+                background: gray;
+            }
+
+            #test23 {
+                width: 100px;
+                height: 100px;
+                background: red;
+                position: absolute;
+                top: 30px;
+                left: 30px;
+                z-index: 1003;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="test1">
+            <div id="test11"></div>
+            <div id="test12"></div>
+        </div>
+        <pre>
+            relative position:
+                1. 相对原来的位置进行偏移。
+                2. 占用的位置还是原来的位置。
+        </pre>
+
+        <div id="test2">
+            <div id="test21"></div>
+            <div id="test22"></div>
+            <div id="test23"></div>
+        </div>
+        <pre>
+            absolute position:
+                1. 相对父元素进行偏移。
+                （如果父元素没有position属性，则继续向上找。直至找到有position属性的父元素或者body元素。）
+                2. 不占用父元素位置。
+                3. 如果有多个absolute position元素，则z-index高的覆盖z-index低的元素。
+        </pre>
+    </body>
+</html>
