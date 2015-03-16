@@ -9,4 +9,9 @@ Entry.bat
 debug/
 release/
 Debug/
+
 bin/
+.metadata/
+.settings/
+.project
+.classpath
