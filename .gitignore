@@ -4,5 +4,9 @@
 a.out
 *.EXE
 *.OBJ
+Entry.bat
 *-build-desktop/
+debug/
+release/
 Debug/
+bin/
