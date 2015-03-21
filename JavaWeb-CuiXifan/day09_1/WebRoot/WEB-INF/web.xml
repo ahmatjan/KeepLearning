@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+	<servlet>
+		<servlet-name>AServlet</servlet-name>
+		<servlet-class>cn.itcast.servlet.AServlet</servlet-class>
+		<init-param>
+			<param-name>key1</param-name>
+			<param-value>value1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>key2</param-name>
+			<param-value>value2</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AServlet</servlet-name>
+		<url-pattern>/AServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CServlet</servlet-name>
+		<servlet-class>cn.itcast.servlet.CServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CServlet</servlet-name>
+		<url-pattern>/CServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EServlet</servlet-name>
+		<servlet-class>cn.itcast.servlet.EServlet</servlet-class>
+	</servlet>
+  <servlet>
+    <servlet-name>FServlet</servlet-name>
+    <servlet-class>cn.itcast.servlet.FServlet</servlet-class>
+  </servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>EServlet</servlet-name>
+		<url-pattern>/EServlet</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FServlet</servlet-name>
+    <url-pattern>/FServlet</url-pattern>
+  </servlet-mapping>
+
+</web-app>
