@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<a href="/day10_2/DServlet?username=ZhangSan&password=123">GET</a>
+	<hr>
+	<form action="/day10_2/DServlet" method="POST">
+		用户名: <input type="text" name="username"><br>
+		密      码:	<input type="password" name="password"><br>
+		爱      好: 
+			<input type="checkbox" name="hobby" value="eat">吃饭
+			<input type="checkbox" name="hobby" value="sleep">睡觉
+			<input type="checkbox" name="hobby" value="code">敲代码<br>
+		<input type="submit" value="提交">
+	</form>
+</body>
+</html>
