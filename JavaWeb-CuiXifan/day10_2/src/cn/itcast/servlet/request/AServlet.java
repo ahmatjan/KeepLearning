@@ -1,10 +1,11 @@
 /*
- * 说明：练习用request来获取客户端的信息，IP、请求方式、User-Agent
+ * 说明：练习用request来获取 请求头(Header)，IP、请求方式、User-Agent
  */
 package cn.itcast.servlet.request;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,14 @@ public class AServlet extends HttpServlet {
 		System.out.println(addr);
 		System.out.println(method);
 		System.out.println(ua);
-	}
+		System.out.println("");
 
+		//获取所有的请求头信息
+		Enumeration e = request.getHeaderNames();
+		while (e.hasMoreElements()) {
+			String headerName = (String)e.nextElement();
+			String headerValue = request.getHeader(headerName);
+			System.out.println(headerName + ": " + headerValue);
+		}
+	}
 }
