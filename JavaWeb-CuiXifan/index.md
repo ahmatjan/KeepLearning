@@ -42,9 +42,9 @@
     |   |-- a.jsp
     |   |-- b.jsp
     |-- session2
-    |   |-- a.jsp
-    |   |-- b.jsp
-    |   |-- c.jsp
+    |   |-- login.jsp
+    |   |-- succ1.jsp
+    |   |-- succ2.jsp
     |-- session3
     |   |-- a.jsp
 /src
