@@ -47,6 +47,8 @@
     |   |-- succ2.jsp
     |-- session3
     |   |-- a.jsp
+    |-- WEB-INF
+    |   |-- web.xml
 /src
     |-- cn.itcast.servlet
     |   |--LoginServlet.java
@@ -61,5 +63,7 @@
     * 一个利用Session的 Login模块。
 * `session3/*`
     * Session的URL重写。
+* `/WebRoot/WEB-INF/web.xml`
+    * 设置Session超时时间。
 * `cn.itcast.uuid` `cn.itcast.commons.CommonUtils.java`
     * 学习使用UUID：生成一个永不重复的32位随机数。
