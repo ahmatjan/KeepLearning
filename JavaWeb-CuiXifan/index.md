@@ -57,8 +57,9 @@
 ```
 * `session1/*`
     * Session域 数据的存取。
-* `session2/*`
+* `session2/*` `cn.itcast.servlet.LoginServlet.java`
     * 一个利用Session的 Login模块。
 * `session3/*`
     * Session的URL重写。
-
+* `cn.itcast.uuid` `cn.itcast.commons.CommonUtils.java`
+    * 学习使用UUID：生成一个永不重复的32位随机数。
