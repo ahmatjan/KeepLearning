@@ -52,6 +52,7 @@
 /src
     |-- cn.itcast.servlet
     |   |--LoginServlet.java
+    |   |--VerifyCodeServlet.java
     |-- cn.itcast.uuid
     |   |--UUIDTest.java
     |-- cn.itcast.commons
@@ -59,7 +60,7 @@
 ```
 * `session1/*`
     * Session域 数据的存取。
-* `session2/*` `cn.itcast.servlet.LoginServlet.java`
+* `session2/*` `cn.itcast.servlet*`
     * 一个利用Session的 Login模块。
 * `session3/*`
     * Session的URL重写。

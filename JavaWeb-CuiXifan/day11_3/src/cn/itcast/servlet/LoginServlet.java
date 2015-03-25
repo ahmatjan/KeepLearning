@@ -22,7 +22,17 @@ public class LoginServlet extends HttpServlet {
 		//获取参数
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String vcodeJsp = request.getParameter("vcode");
+		String vcodeSession = (String) session.getAttribute("vcode");
 
+		//比对验证码
+		if (!vcodeJsp.equalsIgnoreCase(vcodeSession)) {
+			request.setAttribute("msg", "验证码错误！");
+			request.getRequestDispatcher("/session2/login.jsp").forward(request, response);
+			return;
+		}
+
+		//验证账号密码
 		if (username != null && username.startsWith("admin")) {
 			session.setAttribute("username", username);
 			response.sendRedirect("/day11_3/session2/succ1.jsp");

@@ -5,6 +5,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#vcode {
+		width: 50px;
+	}
+</style>
+<script type="text/javascript">
+	function _change() {
+	//1. 得到img元素
+	//2. 修改img的src属性
+	var imgElem = document.getElementById("img")
+	imgElem.src = "/day11_3/VerifyCodeServlet?a=" + new Date().getTime();
+	}
+</script>
 </head>
 <body>
 <h1>登陆</h1>
@@ -25,6 +38,7 @@
 <form action="/day11_3/LoginServlet" method="post">
 	用户名：<input type="text" name="username" value="<%= username %>"><br>
 	密    码：<input type="password" name="password"><br>
+	验证码：<input type="text" name="vcode" id="vcode"> <img src="/day11_3/VerifyCodeServlet" id="img"><a href="javascript:_change()">换一张</a><br>
 	<input type="submit" value="提交">
 </form>
 
