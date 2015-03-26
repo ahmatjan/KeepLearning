@@ -2,15 +2,12 @@
 #### 11_1. JSP
 ```
 /WebRoot
-    |-- jsp1
+    |-- jsp-diractives
     |   |-- a.jsp
     |   |-- b.jsp
-    |-- jsp2
+    |-- jsp-action
     |   |--form.jsp
     |   |--result.jsp
-/src
-    |-- cn.itcast.servlet
-    |   |--AServlet.java
 ```
 * `jsp1/*`
     * 学习JSP基本格式语法
@@ -68,3 +65,80 @@
     * 设置Session超时时间。
 * `cn.itcast.uuid` `cn.itcast.commons.CommonUtils.java`
     * 学习使用UUID：生成一个永不重复的32位随机数。
+
+##Day12
+#### 12_1. JSP指令、JSP动作标签
+```
+day12_1
+├── src
+└── WebRoot
+    ├── actions
+    │   ├── a.jsp
+    │   ├── b.jsp
+    │   ├── c.jsp
+    │   └── d.jsp
+    ├── directives
+    │   ├── a.jsp
+    │   ├── b.jsp
+    │   ├── c.jsp
+    │   └── d.jsp
+    └── object
+        └── a.jsp
+```
+* `directives/*`
+    * JSP三大指令：<%@ page %> <%@ include %> <%@ tablib %>
+* `actions/*`
+    * JSP动作标签：<jsp:include /> <jsp:forward /> <jsp:param />
+* `object/*`
+    * 九大内置对象之 pageContext
+
+#### 12_2. JavaBean
+```
+day12_2
+├── src
+│   └── cn
+│       └── itcast
+│           ├── domain
+│           │   ├── Demo.java
+│           │   └── Person.java
+│           └── utils
+│               └── CommonUtils.java
+└── WebRoot
+    └── bean
+        └── a.jsp
+```
+* `cn.itcast.domain/*` `cn.itcast.utils/*`
+    * 一个JavaBean实例，以及用BeanUtils 来操作JavaBean。
+* `a.jsp`
+    * 学习jsp动作标签，<jsp:useBean /> <jsp:setProperty /> <jsp:getProperty />
+
+
+#### 12_3. EL、EL函数库
+```
+day12_3
+├── src
+│   └── cn
+│       └── itcast
+│           ├── domain
+│           │   └── Person.java
+│           └── fn
+│               └── MyFunction.java
+└── WebRoot
+    ├── el
+    │   ├── a.jsp
+    │   ├── b.jsp
+    │   └── c.jsp
+    ├── el-function
+    │   ├── a.jsp
+    │   └── b.jsp
+    └── WEB-INF
+        └── tlds
+            └── itcast.tld
+
+```
+* `el/*`
+    * el表达式的使用
+* `el-function/a.jsp`
+    * el函数库的使用
+* `el-function/b.jsp` `WEB-INF/tlds/itcast.tld` `cn.itcast.fn.MyFunction.java`
+    * 自定义el函数
