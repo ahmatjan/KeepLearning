@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>${ it:fun() }</h1>
-
+${ it:fun() }
 </body>
 </html>
