@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 	<h1>注册</h1>
  	<span style="color: red; font-weight: 900;">${ msg }</span>
-  	<form action="/day14/RegistServlet" method="post">
+  	<form action="${ pageContext.request.contextPath }RegistServlet" method="post">
   		用户名：<input type="text" name="username" value="${ user.username }"/>${ errors.username }<br>
   		密    码：<input type="password" name="password" value="${ user.password }"/>${ errors.password }<br>
   		验证码：<input type="text" name="verifyCode" style="width: 50px;"/>

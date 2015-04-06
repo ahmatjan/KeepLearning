@@ -37,14 +37,14 @@ public class RegistServlet extends HttpServlet {
 		//用户名校验
 		if (user.getUsername() == null) {
 			errors.put("username", "用户名不能为空");
-		} else if (user.getUsername().length() > 20 || user.getUsername().length() < 6) {
+		} else if (user.getUsername().length() > 20 || user.getUsername().length() < 3) {
 			errors.put("username", "用户名在3-20位之间");
 		}
 
 		//密码校验
 		if (user.getPassword() == null) {
 			errors.put("password", "密码不能为空");
-		} else if (user.getPassword().length() > 20 || user.getPassword().length() < 6) {
+		} else if (user.getPassword().length() > 20 || user.getPassword().length() < 3) {
 			errors.put("password", "密码在3-20位之间");
 		}
 
