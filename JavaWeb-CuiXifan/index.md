@@ -62,3 +62,19 @@
     > XML做数据库
     > 注册时有验证码
     > 服务器端有表单输入校验
+
+## Day15
+
+## Day16
+
+## Day17 JDBC第一天
+    > JDBC原理
+    > 通过JDBC进行增删改查
+    > JDBC的代码规范
+    > ResultSet的相关特性
+    > PreparedStatement用法
+    > JdbcUtils小工具
+    > 面向接口编程
+    > 修改day14，改变dao层
+    > mysql存放大文件
+    > mysql进行批处理

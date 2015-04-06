@@ -1,0 +1,222 @@
+项目
+	> 登陆
+	> 注册
+
+------------------------
+
+建立项目
+
+JSP:
+	* regist.jsp	--> 注册表单
+	* login.jsp		--> 登陆表单
+	* welcome.jsp	--> 欢迎界面（登陆之后才能看见）
+
+Domain:
+	* User.jsp		--> JavaBean
+
+Servlet:
+	* RegistServlet
+	* LoginServlet
+
+Service:
+	* UserService	--> 与用户相关的业务类
+
+Dao:
+	* UserDao		--> 与用户相关的数据类
+
+------------------------
+
+数据库设计：
+	* users.xml
+	<?xml version="1.0" encoding="UTF-8"?>
+	<users>
+		<user username="张三" password="123" />
+	</users>
+
+-------------------------
+
+步骤：
+1. 创建空项目
+2. 导包
+	* CommonUtils
+	* commons-beanutils.jar
+	* commons-logging.jar
+	* dom4j
+	* jaxen-1.1-beta-6.jar
+3. 建文件
+	* cn.itcast.user.domain
+		> User
+	* cn.itcast.user.dao
+		> UserDao
+	* cn.itcast.user.service
+		> UserService
+	* cn.itcast.user.web.servlet
+		> RegistServlet
+		> RegistServlet
+4. JSP
+	* login.jsp
+	* regist.jsp
+	* index.jsp
+5. /temp下创建一个user.xml文件！
+
+--------------------------------
+
+注册需求分析：
+
+regist.jsp
+	> regist表单
+RegistServlet
+	> 封装表单数据到User中去
+	> 调用UserService的Service方法
+		* 如果这个方法没有抛出异常，输出“注册成功”
+		* 如果方法抛出异常，把错误信息保存到request域中，然后转发到regist.jsp中
+UserService#regist()
+	> 调用UserDao的findByUsername()
+		* 如果返回的是空，表示没有存在该用户名，调用UserDao的addUser()添加用户
+		* 如果返回的不是空，表示已存在该用户，抛出异常
+UserDao
+	> 通过分析，该类需要两个方法
+		* findByUsername() 根据用户名查找用户
+		* addUser() 添加用户
+
+注册工作：
+
+1. service层添加一个UserException
+2. dao
+	* User findByUsername(String username)
+	* void add(User user)
+
+3. service
+	* void regist(User user) throws UserException
+
+4. servlet
+	* 封装表单数据到User中取
+	* 调用UserService的regist()方法
+		> 如果这个方法没有抛出异常，输出“注册成功”
+		> 如果这个方法抛出异常，吧错误消息保存到request域中，然后转发到regist.jsp中进行显示
+
+-----------------------
+
+注册验证码：
+1. VerifyCode类
+	* BufferdImage getImage() --> 获取随机验证码图片
+	* String getText() --> 获取图片上的文本
+	* static output(BufferedImage, OutputStream)
+
+2. VerifyCodeServlet
+	* 获取随机验证码图片
+	* 把验证码文字保存在session中
+	* 把图片返回到response中
+
+3. regist.jsp
+	* 添加<img>
+	* 添加一个文本框，输入验证码
+	* 添加一个超链接 "换一张"
+
+4. RegistServlet
+	* 校验验证码
+		> 如果错误，把错误信息添加到request域中，然后转发至regist.jsp中
+		> 如果正确，继续向下执行
+
+---------------
+服务器端表单输入校验
+
+RegistServlet
+	* 输入校验的结果存放在map当中，
+		> key是username\password\veryfyCode
+		> value是“长度需在6-20位之间”或者“不能为空”
+	* 检查map长度是否大于0
+		> 如果大于0则放入request域的errors属性中，并转发到login.jsp
+		> 如果为0则继续向下执行
+
+
+regist.jsp
+	* 把 request域中errors的每个键值放在其对应的位置上。
+
+
+========================================
+========================================
+========================================
+
+登陆功能
+
+login.jsp
+	* 基本的登陆功能
+	* 出错后能够进行提示
+
+LoginServlet
+	* 把JSP中的表单数据封装成User对象
+	* 调用UserService#login()方法
+		> 如果没有抛出异常，则说明登陆成功，把User信息加入session，然后重定向到welcome.jsp
+		> 如果抛出了异常，则把异常信息加入request域，然后转发到login.jsp
+
+UserService#login
+	* 调用UserDao中的findByUsername()
+		> 返回null，则抛出异常“用户不存在”
+		> 返回不为null，比较密码是否正确
+			>> 密码错误，抛出异常“密码错误”
+			>> 密码正确，返回User对象
+
+UserDao
+	* findByUsername()已存在
+
+----------------------------------------
+
+登陆后页面处理
+
+welcome.jsp
+	* 检查对应的session域中是否有user对象
+		> 如果有，显示在页面上
+		> 如果没有，则禁止页面的显示
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
