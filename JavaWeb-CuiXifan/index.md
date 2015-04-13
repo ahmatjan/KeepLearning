@@ -51,9 +51,9 @@
     * 自定义el函数
 
 ## Day13
-#### 13_1 JSTL标签库
-#### 13_2 自定义标签
-#### 13_3 MVC结构的Hello World程序
+    > 13_1 JSTL标签库
+    > 13_2 自定义标签
+    > 13_3 MVC结构的Hello World程序
 
 ## Day14
 
@@ -78,3 +78,12 @@
     > 修改day14，改变dao层
     > mysql存放大文件
     > mysql进行批处理
+
+
+## Day18 JDBC第二天
+    > 事物
+    > 连接池
+    > 装饰设计模式
+    > ThreadLocal
+    > JNDI
+    > DBUtils
