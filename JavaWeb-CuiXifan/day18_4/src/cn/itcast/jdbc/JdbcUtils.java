@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class JdbcUtils {
+	//注意要同时给出"c3p0-config.xml"文件！！
 	private static ComboPooledDataSource dataSource = new ComboPooledDataSource();
 
 	public static Connection getConnection() throws SQLException {

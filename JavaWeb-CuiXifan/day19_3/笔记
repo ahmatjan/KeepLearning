@@ -1,0 +1,129 @@
+1. 导入项目原型 \ 导包 \ 导数据库
+
+2. 功能分析
+	添加用户
+	查询用户
+	编辑用户
+		加载用户到列表显示
+		修改用户
+	删除用户
+	多条件组合查询
+	
+3. 创建包，创建相应的类，搭建项目架构
+
+4. 具体功能分析
+
+添加用户
+	add.jsp
+		> 用户信息的表单
+		> 把"用户信息"和"method=addCustomer"提交给CustomerServlet
+	msg.jsp
+		> 回显添加成功的信息
+	
+	CustomerServlet#add()
+		> 把表单中的信息封装到Bean中
+		> 补充uuid
+		> 把调用CustomerService#add()
+		> ----
+		> 把注册成功的信息存放到request域中
+		> 转发到msg.jsp去
+	CustomerService#add()
+		> 调用CustomerDao#add()来添加用户
+	CustomerDao#add()
+		> 准备sql模板
+		> 准备参数
+		> 执行queryRunner.update()方法
+
+查询用户
+	top.jsp#查询用户
+		> 把"method=findAll"传递给CustomerServlet
+	list.jsp
+		> 用<c:forEach>标签把request域中的信息加载到列表中去
+
+	CustomerServlet#findAll()
+		> 调用CustomerService#findAll方法，
+		> ----
+		> 得到查询结果List<Customer>
+		> 把查询结果存放到request域中
+		> 转发到list.jsp中
+	CustomerService#findAll()
+		> 调用CustomerDao#findAll()
+		> ----
+		> 得到结果并返回
+	CustomerDao#find()
+		> 准备sql模板
+		> queryRunner.query()方法得到结果并返回
+
+编辑用户
+----第一次交互
+	list.jsp#编辑
+		> 把"cid=xxx"和"method=preEdit"参数传递给CustomerServlet
+	edit.jsp
+		> 把request域中的Customer的相关信息加载到表单中去
+
+	CustomerSerlvet#preEdit()
+		> 调用CustomerService#load(cid)
+		> ----
+		> 得到Customer对象
+		> 把Customer对象添加到request域中
+		> 转发到edit.jsp中
+	CustomerService#load(String cid)
+		> 调用CustomerDao#load(cid)
+		> ----
+		> 得到结果并返回
+	CustomerDao#load(String cid)
+		> 准备sql模板
+		> 调用queryRunner.query方法得到Customer对象并返回
+----第二次交互
+	edit.jsp#编辑用户
+		> 把表单信息和"method=edit"参数传递给CustomerServlet
+	msg.jsp
+		> 显示编辑成功
+	
+
+	CustomerServlet#edit(CS)
+		> 调用CustomerServlet#edit()
+		> ----
+		> 把成功信息保存到request域中并转发到msg.jsp
+	CustomerService#edit(Customer)
+		> 调用CustomerDao#edit(Customer)方法
+	CustomerDao#edit(Customer)
+		> 准备sql模板
+		> queryRunner.update执行操作
+
+删除用户
+	list.jsp#删除
+		> 把"cid"和"method=delete"传递给CustomerServlet#delete()
+	msg.jsp
+		> 显示删除成功信息
+
+	CustomerServlet#delete(String cid)
+		> 调用CustomerService#delete(cid)
+		> ----
+		> 添加成功信息到request域中
+		> 转发到msg.jsp中
+	CustomerService#delete(String cid)
+		> 调用CustomerDao#delete(String cid)
+	CustomerDao#delete(String cid)
+		> 准备sql模板
+		> queryRunner.update进行调用
+
+多条件组合查询
+	query.jsp#查询
+		> 把表单信息 和 method=query 传递给CustomerServlet#query()
+	list.jsp
+		> 用<c:forEach>来进行把request域中的数据进行遍历输出
+	
+	CustomerServlet#query(Customer)
+		> 调用CustomerService#query(customer)进行查询
+		> ----
+		> 得到结果，并保存到request域中
+		> 转发到list.jsp中
+	CustomerService#query(Customer)
+		> 调用CustomerDao#query(customer)方法
+		> ----
+		> 得到结果并返回
+	CustomerDao#query(Customer)	
+		> 准备sql模板
+		> 进行queryRunner.query查询
+		> 得到list，并返回

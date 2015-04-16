@@ -87,3 +87,9 @@
     > ThreadLocal
     > JNDI
     > DBUtils
+
+## Day19 JDBC第三天
+    > BaseServlet，一个Servlet响应多个请求
+    > JdbcUtils第3次改写，支持事物和多线程并发
+    > 封装QueryRunner类，把对Connection的处理封装进去
+    > 客户关系管理系统：增删改查用户、多条件组合模糊查询用户
