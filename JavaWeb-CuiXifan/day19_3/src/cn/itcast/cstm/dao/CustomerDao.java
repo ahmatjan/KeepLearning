@@ -64,13 +64,13 @@ public class CustomerDao {
 		}
 	}
 
-	public List<Customer> query(Customer customer) {
+	public List<Customer> query(Customer criteria) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM t_customer WHERE '1'='1'");
 		ArrayList<Object> params = new ArrayList<Object>();
-		String cname = customer.getCname();
-		String gender = customer.getGender();
-		String cellphone = customer.getCellphone();
-		String email = customer.getEmail();
+		String cname = criteria.getCname();
+		String gender = criteria.getGender();
+		String cellphone = criteria.getCellphone();
+		String email = criteria.getEmail();
 		if (cname != null) {
 			sql.append("AND cname LIKE ?");
 			params.add("%" + cname + "%");

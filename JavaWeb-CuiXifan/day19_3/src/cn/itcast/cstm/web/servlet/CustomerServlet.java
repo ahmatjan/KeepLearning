@@ -58,8 +58,8 @@ public class CustomerServlet extends BaseServlet {
 
 	public String query(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Customer customer = CommonUtils.toBean(request.getParameterMap(), Customer.class);
-		request.setAttribute("cstmList", customerService.query(customer));
+		Customer criteria = CommonUtils.toBean(request.getParameterMap(), Customer.class);
+		request.setAttribute("cstmList", customerService.query(criteria));
 
 		return "/list.jsp";
 	}
