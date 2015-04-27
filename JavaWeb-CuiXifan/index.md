@@ -108,3 +108,7 @@
     > day21_5: 全站编码问题
     > day21_6: 页面静态化
 
+## Day22 上传下载 JavaMail
+    > day22_1: 上传
+    > day22_2: 下载
+    > day22_3: JavaMail
