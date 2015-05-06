@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第24课 常见事件</title>
+    <style type="text/css" media="all">
+      div {
+        width: 300px;
+        height: 100px;
+        background: green;
+      }
+    </style>
+
+    <script type="text/javascript" charset="utf-8">
+      function event1() {
+        document.getElementsByName('username')[0].style.border = '1px solid red';
+      }
+
+      function event2() {
+        document.getElementsByName('username')[0].style.border = '';
+      }
+
+      function event3() {
+        alert('谁？');
+      }
+
+      function event4() {
+        alert('请填写完整用户名和密码！');
+        return false;
+      }
+
+      function event5() {
+        document.getElementsByTagName('p')[0].style.border = '1px solid red';
+      }
+    </script>
+  </head>
+  <body onload="event5();">
+    <h1>事件1：onfocus onblur</h1>
+    用户名：<input type="text" name="username" onfocus="event1();" onblur="event2();"/>
+    密  码：<input type="password" name="password"/>
+
+    <h1>事件2：onmouseover</h1>
+    <div onmouseover="event3();"></div>
+
+    <h1>事件3：onsubmit</h1>
+    <form action="24-常见事件.html" onsubmit="return event4();">
+      用户名：<input type="text" name="username"/>
+      密码：<input type="password" name="password"/>
+      <input type="submit" value="提交" />
+    </form>
+
+    <h1>事件4：onload</h1>
+    <p>This is div.</p>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第17课 创建节点</title>
+    <script type="text/javascript" charset="utf-8">
+      function add() {
+        var li = document.createElement('li');
+        var txt = document.createTextNode('冬');
+        li.appendChild(txt);
+
+        document.getElementsByTagName('ul')[0].appendChild(li);
+        console.log(document.getElementsByTagName('ul')[0]);
+      }
+    </script>
+  </head>
+  <body>
+    <input type="button" value="添加节点" onclick="add()"/>
+    <ul>
+      <li>春</li>
+      <li>夏</li>
+      <li>秋</li>
+    </ul>
+  </body>
+</html>

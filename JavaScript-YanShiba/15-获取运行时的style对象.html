@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第15课 获取运行时的style对象</title>
+  </head>
+  <script type="text/javascript" charset="utf-8">
+    function getStyle(obj, attr) {
+      return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj, null)[attr];
+    }
+
+    function change() {
+      var test = document.getElementById('test');
+
+      if (test.style.background.indexOf('red') != -1)
+        test.style.background = 'green';
+      else
+        test.style.background = 'red';
+
+      test.style.width = parseInt(getStyle(test, 'width')) + 10 + 'px';
+      test.style.height = parseInt(getStyle(test, 'height')) + 10 + 'px';
+      test.style.borderBottomWidth = parseInt(getStyle(test, 'borderBottomWidth')) + 3 + 'px';
+    }
+  </script>
+
+  <style type="text/css" media="all">
+    div {
+      background: red;
+      width: 300px;
+      height: 300px;
+      border-bottom: 1px solid black;
+    }
+  </style>
+
+  <body>
+    <div id="test" onclick="change()"
+      点击div使其：<br>
+      1. 背景色红绿交替<br>
+      2. 宽高增加5px<br>
+      3. 下边框增粗2px<br>
+    </div>
+  </body>
+</html>
+
+<pre>
+说明：
+  getStyle能够获取运行时css属性！！
+</pre>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第22课 清除定时器</title>
+    <script type="text/javascript" charset="utf-8">
+      function bang() {
+        var h2 = document.getElementsByTagName('h2')[0];
+        if ((parseInt(h2.innerHTML)) == 0) {
+          document.getElementsByTagName('img')[0].src='images/devil.jpg';
+          clearInterval(clock);
+        } else {
+          h2.innerHTML = parseInt(h2.innerHTML) - 1;
+        }
+      }
+
+      var clock = setInterval('bang()', 1000);
+    </script>
+  </head>
+  <body>
+    <h1>定时器</h1>
+    <h2>3</h2>
+    <img src="images/bomb.png"/>
+  </body>
+</html>

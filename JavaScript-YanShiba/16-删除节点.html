@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第16课 删除节点</title>
+    <script type="text/javascript" charset="utf-8">
+      function del() {
+        var lis = document.getElementsByTagName('li');
+        var li = lis[lis.length-1];
+        li.parentNode.removeChild(li);
+      }
+    </script>
+  </head>
+  <body>
+    <input type="button" value="删除最后一个节点" onclick="del()"/>
+    <ul>
+      <li>春</li>
+      <li>夏</li>
+      <li>秋</li>
+      <li>冬</li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第12课 开关灯泡</title>
+    <script type="text/javascript" charset="utf-8">
+      function toggle() {
+        img = document.getElementById('test');
+        if (img.src.indexOf('on.jpg') != -1)
+          img.src = 'images/off.jpg';
+        else
+          img.src = 'images/on.jpg';
+      }
+    </script>
+  </head>
+  <body>
+    <img src="images/on.jpg" alt="" id="test" onclick="toggle()"/>
+  </body>
+</html>

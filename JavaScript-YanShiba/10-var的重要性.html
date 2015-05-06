@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第10课 var的重要性</title>
+    <script type="text/javascript" charset="utf-8">
+      window.str = 'Union';
+
+      function f1() {
+        //var str = 'China';  //window.str还是Union
+        //str = 'China';      //window.str变成了China
+      }
+
+      f1();
+      alert(window.str);
+    </script>
+  </head>
+  <body>
+    引用一个变量时，如果在当前域中找不到，则到上一层作用域中寻找。
+  </body>
+</html>

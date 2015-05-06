@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第11课 第一个特效</title>
+    <style type="text/css" media="all">
+      div {
+        height: 300px;
+        width: 300px;
+      }
+
+      #test1 {
+        background: red;
+      }
+
+      #test2 {
+        background: green;
+      }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+      function change() {
+        var div = document.getElementById('test1');
+        div.id = 'test2';
+      }
+    </script>
+  </head>
+  <body>
+    <h1>特效是什么？</h1>
+    <div id="test1" onclick="change()"></div>
+  </body>
+</html>

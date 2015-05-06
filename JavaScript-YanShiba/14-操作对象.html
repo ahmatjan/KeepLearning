@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第14课 操作对象</title>
+    <script type="text/javascript" charset="utf-8">
+      function change() {
+        var test = document.getElementById('test');
+        if (test.style.background.indexOf('red') != -1)
+          test.style.background = 'green';
+        else
+          test.style.background = 'red';
+
+        console.log(test.style.width);
+        test.style.width = parseInt(test.style.width) + 10 + 'px';
+        test.style.height = parseInt(test.style.height) + 10 + 'px';
+        test.style.borderBottomWidth = parseInt(test.style.borderBottomWidth) + 3 + 'px';
+      }
+    </script>
+    </style>
+  </head>
+  <body>
+    <div id="test" onclick="change()"
+      style="background: red; width: 300px; height: 300px; border-bottom: 1px solid black;">
+      点击div使其：<br>
+      1. 背景色红绿交替<br>
+      2. 宽高增加5px<br>
+      3. 下边框增粗2px<br>
+    </div>
+  </body>
+</html>
+
+<pre>
+说明：
+  test.style.width只能获取内嵌的css属性！！
+</pre>

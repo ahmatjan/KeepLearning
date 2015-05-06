@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第18课 暴力操作节点</title>
+    <script type="text/javascript" charset="utf-8">
+      function set() {
+        var ul = document.getElementsByTagName('ul')[0];
+        ul.innerHTML = '<li>春</li><li>夏</li><li>秋</li>';
+      }
+
+      function add() {
+        var ul = document.getElementsByTagName('ul')[0];
+        ul.innerHTML = ul.innerHTML + '<li>冬</li>';
+      }
+    </script>
+  </head>
+    <input type="button" value="设置春夏秋" onclick="set()"/>
+    <input type="button" value="添加冬" onclick="add()"/>
+    <ul>
+    </ul>
+  <body>
+  </body>
+</html>
