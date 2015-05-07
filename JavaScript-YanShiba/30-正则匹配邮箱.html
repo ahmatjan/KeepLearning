@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第30课 正则匹配邮箱</title>
+  </head>
+  <body>
+    <input type="button" value="高亮有邮箱的人"/>
+    <ul>
+      <li>刘备</li>
+      <li>关羽&lt;guanyu@163.com&gt;</li>
+      <li>张飞</li>
+    </ul>
+  </body>
+  <script type="text/javascript" charset="utf-8">
+    document.getElementsByTagName('input')[0].onclick = function () {
+      var lis = document.getElementsByTagName('li');
+      var patt = /[\w\.]+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+/;
+      for (var i = 0; i < lis.length; i++) {
+        if (patt.exec(lis[i].innerHTML) != null) {
+          lis[i].style.background = 'yellow';
+        }
+      }
+    };
+  </script>
+</html>
+
+<pre>
+patt.exec() 返回值：
+1. 如果有匹配的子串，则返回该子串
+2. 如果没有匹配的子串，则返回null
+</pre>

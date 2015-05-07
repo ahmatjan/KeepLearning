@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>第26课 事件对象</title>
+  </head>
+  <body>
+    <img src="images/belle.jpg"/>
+  </body>
+  <script type="text/javascript" charset="utf-8">
+    document.getElementsByTagName('img')[0].onclick = function (ev) {
+      //ev = window.event || ev;  //兼容IE低版本
+      console.log(ev);
+      alert('住手！');
+    }
+  </script>
+</html>
