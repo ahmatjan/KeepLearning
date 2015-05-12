@@ -32,8 +32,8 @@
     document.getElementsByName('username')[0].value = 'Jason';
 
     //找子节点
-    console.log(document.getElementById('test1').childNodes.length);
-    console.log(document.getElementById('test1').children.length);
+    console.log(document.getElementById('test1').childNodes.length);  //会把换行计算在内。w3c标准。
+    console.log(document.getElementById('test1').children.length);    //不会把换行也计算在内。非w3c标准，但各浏览器支持良好。
 
     //找父节点
     document.getElementsByTagName('p')[2].parentNode.style.border = '1px solid orange';
