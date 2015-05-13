@@ -112,3 +112,9 @@
     > day22_1: 上传
     > day22_2: 下载
     > day22_3: JavaMail
+
+## Day23 AJAX
+    > day23_1: AJAX学习，与服务器通过text、XML进行通信
+    > day23_2: XStream, 把JavaBean转换为XML
+    > day23_3: AJAX学习，与服务器通过JSON进行通信
+    > day23_4: JSON-LIB, 把JavaBean转换为JSON
