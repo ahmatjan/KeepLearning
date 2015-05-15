@@ -1,0 +1,44 @@
+1. 省下拉列表
+
+ajax.jsp
+	* 页面加载完成后，请求服务器获得所有省的JSON格式信息；
+	* ----
+	* 把省的JSON信息加载到第一个<select>元素中
+	
+Serlvet#doGet()
+	* 调用service的getAllProvince()方法
+	* ----
+	* 把返回的结果转换成JSON格式返回给客户端
+
+Service
+	* 略
+	* ----
+	* 略
+
+Dao
+	* 查询数据库中所有省
+	* ----
+	* 返回结果列表
+
+
+2. 市下拉列表
+
+ajax.jsp
+	* 省下拉列表发生变化后，请求服务器获得该省所有市的JSON格式信息；
+	* ----
+	* 把市的JSON信息加载到第二个<select>元素中
+	
+Serlvet#doPost()
+	* 调用service的getCityByProvince()方法
+	* ----
+	* 把返回的结果转换成JSON格式返回给客户端
+
+Service
+	* 略
+	* ----
+	* 略
+
+Dao
+	* 查询数据库某个省对应的所有市
+	* ----
+	* 返回结果列表
