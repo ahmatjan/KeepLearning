@@ -41,9 +41,18 @@
     <servlet-name>VerifyCodeServletTest</servlet-name>
     <servlet-class>cn.itcast.web.servlet.VerifyCodeServletTest</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AJAXTestServlet</servlet-name>
+    <servlet-class>cn.itcast.jquery.AJAXTestServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>VerifyCodeServletTest</servlet-name>
     <url-pattern>/VerifyCodeServletTest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AJAXTestServlet</servlet-name>
+    <url-pattern>/AJAXTestServlet</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>
