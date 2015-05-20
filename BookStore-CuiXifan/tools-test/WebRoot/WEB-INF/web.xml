@@ -20,7 +20,6 @@
   		<param-value>gbk</param-value>
   	</init-param>
   </filter>
-
   <filter-mapping>
   	<filter-name>EncodingFileter</filter-name>
   	<url-pattern>/*</url-pattern>
@@ -41,15 +40,15 @@
     <servlet-name>VerifyCodeServletTest</servlet-name>
     <servlet-class>cn.itcast.web.servlet.VerifyCodeServletTest</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>AJAXTestServlet</servlet-name>
-    <servlet-class>cn.itcast.jquery.AJAXTestServlet</servlet-class>
-  </servlet>
-
   <servlet-mapping>
     <servlet-name>VerifyCodeServletTest</servlet-name>
     <url-pattern>/VerifyCodeServletTest</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AJAXTestServlet</servlet-name>
+    <servlet-class>cn.itcast.jquery.AJAXTestServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>AJAXTestServlet</servlet-name>
     <url-pattern>/AJAXTestServlet</url-pattern>
