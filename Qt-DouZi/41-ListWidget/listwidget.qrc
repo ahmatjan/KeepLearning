@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/iCal.png</file>
+        <file>Images/iChat.png</file>
+        <file>Images/iDVD.png</file>
+        <file>Images/iMovie.png</file>
+        <file>Images/iPhoto.png</file>
+        <file>Images/iTunes.png</file>
+    </qresource>
+</RCC>
