@@ -17,11 +17,14 @@ public class VerifyCodeServletTest extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		response.setContentType("text/html; charset=utf-8");
+
 		String verifyCode = request.getParameter("verifyCode");
 		String vcode = (String) request.getSession().getAttribute("vCode");
 
-		System.out.println(verifyCode);
-		System.out.println(vcode);
-		System.out.println(verifyCode.equalsIgnoreCase(vcode));
+		if (verifyCode.equalsIgnoreCase(vcode))
+			response.getWriter().print("验证码正确！");
+		else
+			response.getWriter().print("验证码错误！");
 	}
 }

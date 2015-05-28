@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>登陆</title>
+<title>练习验证码的使用</title>
 </head>
 <body>
-<h1>登陆</h1>
+<h1>练习验证码的使用</h1>
 <form action="${pageContext.request.contextPath}/VerifyCodeServletTest" method="post">
 	用户名: <input type="text" name="username"/><br>
 	密码: <input type="password" name="password"/><br>
