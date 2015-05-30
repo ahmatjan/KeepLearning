@@ -16,31 +16,33 @@
 		<span>用户名注册</span>
 	</div>
 	<div id="divBody">
+		<form method="POST" action="${pageContext.request.contextPath}/UserServlet" id="formTable">
+			<input type="hidden" name="method" value="regist"/>
 		<table id="tableForm">
 			<tr>
 				<td class="tdName">用户名：</td>
-				<td class="tdText"><input class="inputText" type="text" name="username"/></td>
-				<td class="tdError"><span class="spanError">用户名不能为空</span></td>
+				<td class="tdText"><input class="inputText" type="text" name="loginname" id="loginname" value="${user.loginname}"/></td>
+				<td class="tdError"><span class="spanError" id="loginnameError">${errors.loginname}</span></td>
 			</tr>
 			<tr>
 				<td class="tdName">登陆密码：</td>
-				<td class="tdText"><input class="inputText" type="password" name="username"/></td>
-				<td class="tdError"><span class="spanError"></span></td>
+				<td class="tdText"><input class="inputText" type="password" name="loginpass" id="loginpass" value="${user.loginpass}"/></td>
+				<td class="tdError"><span class="spanError" id="loginpassError">${errors.loginpass}</span></td>
 			</tr>
 			<tr>
 				<td class="tdName">确认密码：</td>
-				<td class="tdText"><input class="inputText" type="password" name="username"/></td>
-				<td class="tdError"><span class="spanError"></span></td>
+				<td class="tdText"><input class="inputText" type="password" name="reloginpass" id="reloginpass" value="${user.reloginpass}"/></td>
+				<td class="tdError"><span class="spanError" id="reloginpassError">${errors.reloginpass}</span></td>
 			</tr>
 			<tr>
 				<td class="tdName">Email：</td>
-				<td class="tdText"><input class="inputText" type="text" name="username"/></td>
-				<td class="tdError"><span class="spanError"></span></td>
+				<td class="tdText"><input class="inputText" type="text" name="email" id="email" value="${user.email}"/></td>
+				<td class="tdError"><span class="spanError" id="emailError">${errors.email}</span></td>
 			</tr>
 			<tr>
 				<td class="tdName">图形验证码：</td>
-				<td class="tdText"><input class="inputText" type="text" name="username"/></td>
-				<td class="tdError"><span class="spanError"></span></td>
+				<td class="tdText"><input class="inputText" type="text" name="verifyCode" id="verifyCode" value="${user.verifyCode}"/></td>
+				<td class="tdError"><span class="spanError" id="verifyCodeError">${errors.verifyCode}</span></td>
 			</tr>
 			<tr>
 				<td class="tdName"></td>
@@ -53,6 +55,7 @@
 				<td class="tdError"></td>
 			</tr>
 		</table>
+		</form>
 	</div>
 </div>
 

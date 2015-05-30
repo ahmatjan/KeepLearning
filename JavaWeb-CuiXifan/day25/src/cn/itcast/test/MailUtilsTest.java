@@ -23,8 +23,8 @@ public class MailUtilsTest {
 		 * 2. 创建邮件对象
 		 * 3. 发送
 		 */
-		Session session = MailUtils.createSession("smtp.126.com", "account@126.com", "password");
-		Mail mail = new Mail("account@126.com", "account@126.com", "测试邮件一封", "<a href='http://www.baidu.com'>百度</a>");
+		Session session = MailUtils.createSession("smtp.126.com", "lajixiang00@126.com", "itcastitcast");
+		Mail mail = new Mail("lajixiang00@126.com", "lajixiang00@126.com", "测试邮件一封", "<a href='http://www.baidu.com'>百度</a>");
 		MailUtils.send(session, mail);
 	}
 }
