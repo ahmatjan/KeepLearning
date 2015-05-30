@@ -2,15 +2,12 @@
 该项目是学习一些东西的代码集合，一般跟某份教程或者某本书一致。代码+详细注释，可执行。
 
 这个代码集合托管在github上主要出于以下几个原因：
-1. 备份：在github上备份，防止本机文件丢失。
-2. 同步：方便在不同电脑上进行代码同步。
-3. 督促：通过github附带的各种功能（如提交统计、代码统计）来督促自己不断学习。
+* 备份：在github上备份，防止本机文件丢失。
+* 同步：方便在不同电脑上进行代码同步。
+* 督促：通过github附带的各种功能（如提交统计、代码统计）来督促自己不断学习。
 
 
 ## C语言-郝斌
-* 环境：Windows & VC6.0
-
-## OnlineJudge
 * 环境：Windows & VC6.0
 
 ## OnlineJudge
@@ -28,13 +25,13 @@
 ## Assembly-王爽
 * 环境：Window & MASM
 
-## Java-MengFanchao
+## Java-孟凡超
 * 环境：Linux & JDK
 
-## Qt-HuoYafei
+## Qt-霍亚飞
 * 环境：Linux Or Windows
 
-## Qt-DouZi
+## Qt-豆子
 * 环境：Linux Or Windows
 
 ## C_MySql-zetcode
@@ -60,6 +57,6 @@
 * 内容：学习了JavaScript。
 * 环境：Linux & Vim
 
-## JavaWeb-CuiXifan
+## JavaWeb-崔希凡
 * 内容：系统学习了JavaWeb，简单学习了JQuery，并实现了一个网上书城。
 * 环境：Linux & MyEclipse
