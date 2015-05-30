@@ -3,6 +3,8 @@ package cn.itcast.goods.user.dao;
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.itcast.goods.user.domain.User;
@@ -52,4 +54,26 @@ public class UserDao {
 		qr.update(sql, params);
 	}
 
+
+	/**
+	 * 根据激活码查询用户
+	 * @param activationCode
+	 * @return
+	 * @throws SQLException
+	 */
+	public User findUserByActivationCode(String activationCode) throws SQLException {
+		String sql = "SELECT * FROM t_user WHERE activationCode=?";
+		return qr.query(sql, new BeanHandler<User>(User.class), activationCode);
+	}
+
+	/**
+	 * 修改用户的激活状态
+	 * @param user
+	 * @param status
+	 * @throws SQLException
+	 */
+	public void updateStatus(User user, boolean status) throws SQLException {
+		String sql = "UPDATE t_user SET status=? WHERE uid=?";
+		qr.update(sql, status, user.getUid());
+	}
 }

@@ -11,6 +11,7 @@ import javax.mail.Session;
 import cn.itcast.commons.CommonUtils;
 import cn.itcast.goods.user.dao.UserDao;
 import cn.itcast.goods.user.domain.User;
+import cn.itcast.goods.user.service.exception.UserException;
 import cn.itcast.mail.Mail;
 import cn.itcast.mail.MailUtils;
 
@@ -90,6 +91,32 @@ public class UserService {
 		try {
 			MailUtils.send(session, mail);
 		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 进行用户的激活
+	 * @param activationCode
+	 * @throws UserException
+	 */
+	public void activate (String activationCode) throws UserException {
+		/*
+		 * 调用userDao#findUserByActivationCode根据激活码查找用户
+		 *	* 如果找到的是null，抛出异常：无效的激活码
+		 *	* 如果不为null，查看返回的User状态是否为true
+		 *		* 如果为true，抛出异常：该用户已激活
+		 *		* 如果为false，则调用userDao#updateStatus()把更改用户的状态为true
+		 */
+		try {
+			User user = userDao.findUserByActivationCode(activationCode);
+			if (user == null)
+				throw new UserException("无效的激活码！");
+			else if (user.isStatus() == true)
+				throw new UserException("该用户已激活，请不要二次激活！");
+			else
+				userDao.updateStatus(user, true);
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}

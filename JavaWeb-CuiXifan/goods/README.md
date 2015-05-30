@@ -108,6 +108,35 @@
 		UserDao#add()
 			> 数据库中插入用户
 	
-#### 2.2 用户注册模块
+#### 2.3 用户激活模块
+		激活邮件
+			> 激活链接
+
+		msg.jsp
+			> 回显激活的结果
+
+		UserServlet#activate()
+			> 获取激活码
+			> 调用userService#activate()完成激活
+			> ----
+			> 获取异常
+				* 如果有异常，则把异常存放到request域中，然后转发到msg.jsp中
+				* 如果没有异常，则直接转发到msg.jsp中提示激活成功
+
+		UserService#activate()
+			> 调用userDao#findUserByActivationCode根据激活码查找用户
+				* 如果找到的是null，抛出异常：无效的激活码
+				* 如果不为null，查看返回的User状态是否为true
+					* 如果为true，抛出异常：该用户已激活
+					* 如果为false，则调用userDao#updateStatus()把更改用户的状态为true
+
+		UserDao
+			> #findUserByActivationCode() 根据激活码返回用户
+			> #updateStatus() 更改用户激活状态
+
+
+
+
+
 #### 2.2 用户注册模块
 #### 2.2 用户注册模块

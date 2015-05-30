@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import cn.itcast.commons.CommonUtils;
 import cn.itcast.goods.user.domain.User;
 import cn.itcast.goods.user.service.UserService;
+import cn.itcast.goods.user.service.exception.UserException;
 import cn.itcast.servlet.BaseServlet;
 
 /**
@@ -106,6 +107,12 @@ public class UserServlet extends BaseServlet {
 		return "f:/jsps/msg.jsp";
 	}
 
+	/**
+	 * 注册时进行的用户参数校验
+	 * @param user
+	 * @param session
+	 * @return
+	 */
 	private Map<String, String> validateParameters(User user, HttpSession session) {
 		/*
 		 * 1.校验用户名
@@ -144,8 +151,8 @@ public class UserServlet extends BaseServlet {
 		String email = user.getEmail();
 		if (email == null || email.trim().isEmpty()) {
 			errors.put("email", "Email不能为空");
-		} else if (email.length() < 3 || email.length() > 20) {
-			errors.put("email", "Email必须在3~20之间");
+		} else if (!email.matches("^([\\w-.])+@([\\w-])+((\\.[\\w-]{2,3}){1,2})$")) {
+			errors.put("email", "Email格式错误");
 		} else if (!userService.ajaxValidateEmail(email)) {
 			errors.put("email", "Email已被注册");
 		}
@@ -162,4 +169,38 @@ public class UserServlet extends BaseServlet {
 
 		return errors;
 	}
+
+	/**
+	 * 用户的激活
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public String activate(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		/*
+		 * 1.获取激活码
+		 * 2.调用userService#activate()完成激活
+		 * ----
+		 * 3.获取异常
+		 *	* 如果有异常，则把异常存放到request域中，然后转发到msg.jsp中
+		 *  * 如果没有异常，则直接转发到msg.jsp中提示激活成功
+		 */
+		String activationCode = req.getParameter("activationCode");
+		try {
+			userService.activate(activationCode);
+		} catch (UserException e) {
+			req.setAttribute("code", "error");
+			req.setAttribute("msg", e.getMessage());
+			return "f:/jsps/msg.jsp";
+		}
+
+		req.setAttribute("code", "success");
+		req.setAttribute("msg", "恭喜，激活成功，请马上登陆！");
+		return "f:/jsps/msg.jsp";
+
+	}
+
 }

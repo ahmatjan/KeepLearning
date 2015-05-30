@@ -162,7 +162,7 @@ function validateEmail() {
 	}
 
 	//格式校验
-	if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(text)) {
+	if (!/^([\w-.])+@([\w-])+((\.[\w-]{2,3}){1,2})$/.test(text)) {
 		spanError.text('邮箱格式不正确');
 		showError(spanError);
 		return false;
