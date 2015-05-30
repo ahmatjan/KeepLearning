@@ -102,11 +102,9 @@ public class UserService {
 	 */
 	public void activate (String activationCode) throws UserException {
 		/*
-		 * 调用userDao#findUserByActivationCode根据激活码查找用户
-		 *	* 如果找到的是null，抛出异常：无效的激活码
-		 *	* 如果不为null，查看返回的User状态是否为true
-		 *		* 如果为true，抛出异常：该用户已激活
-		 *		* 如果为false，则调用userDao#updateStatus()把更改用户的状态为true
+		 * 1.调用userDao#findUserByActivationCode根据激活码查找用户，如果找到的是null，抛出异常：无效的激活码 ----over
+		 * 2.查看返回的User状态是否为true，如果为true，抛出异常：该用户已激活 ----over
+		 * 3.调用userDao#updateStatus()把更改用户的状态为true
 		 */
 		try {
 			User user = userDao.findUserByActivationCode(activationCode);
@@ -116,6 +114,19 @@ public class UserService {
 				throw new UserException("该用户已激活，请不要二次激活！");
 			else
 				userDao.updateStatus(user, true);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 登陆方法
+	 * @param formUser
+	 * @return
+	 */
+	public User login(User formUser) {
+		try {
+			return userDao.findByNameAndPass(formUser);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

@@ -76,4 +76,16 @@ public class UserDao {
 		String sql = "UPDATE t_user SET status=? WHERE uid=?";
 		qr.update(sql, status, user.getUid());
 	}
+
+	/**
+	 * 根据用户名密码返回User对象
+	 * @param formUser
+	 * @return
+	 * @throws SQLException 
+	 */
+	public User findByNameAndPass(User formUser) throws SQLException {
+		String sql = "SELECT * FROM t_user WHERE loginname=? AND loginpass=?";
+		return qr.query(sql, new BeanHandler<User>(User.class), formUser.getLoginname(), formUser.getLoginpass());
+	}
+
 }

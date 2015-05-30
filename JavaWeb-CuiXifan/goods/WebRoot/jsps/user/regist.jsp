@@ -47,7 +47,7 @@
 			<tr>
 				<td class="tdName"></td>
 				<td class="tdText"><div id="divVerifyCode"><img id="imgVerifyCode" src="${pageContext.request.contextPath}/VerifyCodeServlet"></div></td>
-				<td><a href="javascript:changeAOther()">换一张</a></td>
+				<td><a href="javascript:changeAnOtherImg()">换一张</a></td>
 			</tr>
 			<tr>
 				<td class="tdName"></td>

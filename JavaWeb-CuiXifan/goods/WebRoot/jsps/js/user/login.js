@@ -112,7 +112,7 @@ function validateVerifyCode() {
 			async: false,
 			type: "POST",
 			dataType: "json",
-			data: {method: "validateVerifyCode", verifyCode: value},
+			data: {method: "ajaxValidateVerifyCode", verifyCode: value},
 			url: "/goods/UserServlet",
 			success: function(flag) {
 				if(!flag) {
@@ -124,4 +124,8 @@ function validateVerifyCode() {
 		});
 	}
 	return bool;
+}
+
+function changeAnOtherImg() {
+	$('#vCode').attr('src', '/goods/VerifyCodeServlet?a=' + (new Date()).getTime());
 }

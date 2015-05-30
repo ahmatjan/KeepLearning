@@ -2,10 +2,12 @@ package cn.itcast.goods.user.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -84,15 +86,15 @@ public class UserServlet extends BaseServlet {
 			throws ServletException, IOException {
 		/*
 		 * 1.封装表单数据到JavaBean中
-		 * 2.校验参数
-		 *	如果有参数错误，则把map保存到request域中，然后转发到regist.jsp
+		 * 2.校验参数。如果有参数错误，则把map保存到request域中，然后转发到regist.jsp ----over
 		 * 3.调用userService完成业务
+		 * ----
 		 * 4.保存成功信息
 		 * 5.转发到msg.jsp
 		 */
 		User user = CommonUtils.toBean(req.getParameterMap(), User.class);
 
-		Map<String, String> errors = validateParameters(user, req.getSession());
+		Map<String, String> errors = validateRegitstParameters(user, req.getSession());
 		if (errors.size() > 0) {
 			req.setAttribute("user", user);
 			req.setAttribute("errors", errors);
@@ -113,7 +115,7 @@ public class UserServlet extends BaseServlet {
 	 * @param session
 	 * @return
 	 */
-	private Map<String, String> validateParameters(User user, HttpSession session) {
+	private Map<String, String> validateRegitstParameters(User user, HttpSession session) {
 		/*
 		 * 1.校验用户名
 		 * 2.校验密码
@@ -184,9 +186,8 @@ public class UserServlet extends BaseServlet {
 		 * 1.获取激活码
 		 * 2.调用userService#activate()完成激活
 		 * ----
-		 * 3.获取异常
-		 *	* 如果有异常，则把异常存放到request域中，然后转发到msg.jsp中
-		 *  * 如果没有异常，则直接转发到msg.jsp中提示激活成功
+		 * 3.获取异常。如果有异常，则把异常存放到request域中，然后转发到msg.jsp中。----over
+		 * 4.转发到msg.jsp中提示激活成功
 		 */
 		String activationCode = req.getParameter("activationCode");
 		try {
@@ -203,4 +204,70 @@ public class UserServlet extends BaseServlet {
 
 	}
 
+
+	/**
+	 * 用户登陆功能
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public String login(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		/*
+		 * 1.获取表单数据
+		 * 2.进行表单数据校验，如果errors的size()>0，则request域中存入数据[errors“对应的错误信息”][user“表单信息”]，转发到login.jsp ----over
+		 * 3.调用userService#login()方法
+		 * 4.得到的返回值如果是null，request域中存入数据[msg“用户名/密码错误”][user“用户名、密码、注册码”]，转发到login.jsp ----over
+		 * 5.得到的返回值user的状态如果是false，则request域中存入数据[msg“用户尚未激活请立即激活”][user“用户名、密码、注册码”]，转发到login.jsp ----over
+		 * 6.得到的返回值user的loginname存入session中，loginname的url编码存入cookie中，转发到index.jsp
+		 */
+		User formUser = CommonUtils.toBean(req.getParameterMap(), User.class);
+
+		Map<String, String> errors = validateLoginParameters(formUser, req.getSession());
+		if (errors.size() > 0) {
+			req.setAttribute("errors", errors);
+			req.setAttribute("user", formUser);
+			return "f:/jsps/user/login.jsp";
+		}
+
+		User user = userService.login(formUser);
+
+		if (user == null) {
+			req.setAttribute("msg", "用户名/密码错误");
+			req.setAttribute("user", formUser);
+			return "f:/jsps/user/login.jsp";
+		}
+
+		if (user.isStatus() == false) {
+			req.setAttribute("msg", "用户尚未激活请立即激活");
+			req.setAttribute("user", formUser);
+			return "f:/jsps/user/login.jsp";
+		}
+
+		req.getSession().setAttribute("loginname", user.getLoginname());
+		Cookie cookie = new Cookie("loginname", URLEncoder.encode(user.getLoginname(), "UTF-8"));
+		cookie.setMaxAge(60 * 24 * 10);
+		resp.addCookie(cookie);
+		return "f:/index.jsp";
+	}
+
+	/**
+	 * 进行登陆表单数据的校验工作
+	 * @param formUser
+	 * @param session
+	 * @return
+	 */
+	private Map<String, String> validateLoginParameters(User formUser,
+			HttpSession session) {
+		/*
+		 * 1.校验用户名
+		 * 2.校验密码
+		 * 3.校验验证码
+		 */
+
+		Map<String, String> errors = new HashMap<String, String>();
+		return errors;
+	}
 }

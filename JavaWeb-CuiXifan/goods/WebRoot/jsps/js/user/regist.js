@@ -53,8 +53,8 @@ function showError(ele) {
 }
 
 //更换另一张验证码
-function changeAOther() {
-	$('#imgVerifyCode').attr('src', '/goods/VerifyCodeServlet?' + (new Date()).getTime());
+function changeAnOtherImg() {
+	$('#imgVerifyCode').attr('src', '/goods/VerifyCodeServlet?a=' + (new Date()).getTime());
 }
 
 //用户名校验

@@ -94,9 +94,9 @@
 
 		UserServlet#regist()
 			> 封装表单数据到JavaBean中
-			> 校验参数
-				* 如果有参数错误，则把map保存到request域中，然后转发到regist.jsp
+			> 校验参数。如果有参数错误，则把map保存到request域中，然后转发到regist.jsp ----over
 			> 调用userService完成业务
+			> ----
 			> 保存成功信息
 			> 转发到msg.jsp
 
@@ -119,16 +119,13 @@
 			> 获取激活码
 			> 调用userService#activate()完成激活
 			> ----
-			> 获取异常
-				* 如果有异常，则把异常存放到request域中，然后转发到msg.jsp中
-				* 如果没有异常，则直接转发到msg.jsp中提示激活成功
+			> 获取异常。如果有异常，则把异常存放到request域中，然后转发到msg.jsp中。----over
+			> 转发到msg.jsp中提示激活成功
 
 		UserService#activate()
-			> 调用userDao#findUserByActivationCode根据激活码查找用户
-				* 如果找到的是null，抛出异常：无效的激活码
-				* 如果不为null，查看返回的User状态是否为true
-					* 如果为true，抛出异常：该用户已激活
-					* 如果为false，则调用userDao#updateStatus()把更改用户的状态为true
+			> 调用userDao#findUserByActivationCode根据激活码查找用户，如果找到的是null，抛出异常：无效的激活码 ----over
+			> 查看返回的User状态是否为true，如果为true，抛出异常：该用户已激活 ----over
+			> 调用userDao#updateStatus()把更改用户的状态为true
 
 		UserDao
 			> #findUserByActivationCode() 根据激活码返回用户
@@ -138,5 +135,68 @@
 
 
 
+#### 2.3 用户登陆模块
+	1. 登陆校验流程分析
+		JS校验
+			> 登陆名是否为空
+			> 长度3~20
+
+		AJAX校验
+			> 验证码是否正确
+
+		校验时机
+			> 得到光标隐藏
+			> 失去光标校验
+			> 提交时再次校验
+
+	2. 登陆流程分析
+
+		login.jsp
+			> 登陆表单和"method=login"
+			> ----
+			> 出错信息、登录名、密码、验证码进行回显
+			> ----
+			> cookie中的数据自动填充到登录名这一栏
+
+		index.jsp
+			> 根据session中的用户名进行显示
+
+		UserServlet#login()
+			> 获取表单数据
+			> 进行表单数据校验，如果errors的size()>0，则request域中存入数据[errors“对应的错误信息”][user“表单信息”]，转发到regist.jsp ----over
+			> 调用userService#login()方法
+			> 得到的返回值如果是null，request域中存入数据[msg“用户名/密码错误”][user“用户名、密码、注册码”]，转发到regist.jsp ----over
+			> 得到的返回值user的状态如果是false，则request域中存入数据[msg“用户尚未激活请立即激活”]，转发到regist.jsp ----over
+			> 得到的返回值user的loginname存入session中，loginname的url编码存入cookie中
+
+		User UserService#login(User)
+			> 直接返回userDao#login(User)的返回值
+
+		UserDao#login(User)
+			> 根据user的用户名密码进行查询，返回结果
+
+
+
 #### 2.2 用户注册模块
-#### 2.2 用户注册模块
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
