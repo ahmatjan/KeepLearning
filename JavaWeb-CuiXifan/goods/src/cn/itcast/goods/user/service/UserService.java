@@ -132,4 +132,26 @@ public class UserService {
 		}
 	}
 
+	/**
+	 * 修改密码
+	 * @param formUser
+	 * @throws UserException 
+	 */
+	public void updatePassword(User formUser) throws UserException {
+		/**
+		 * 1.调用userDao#validateOldPass来校验旧密码是否正确
+		 * 2.如果返回值为false，则抛出异常：当前密码错误
+		 * 3.调用userDao#updatePassword来修改密码
+		 */
+		boolean flag;
+		try {
+			flag = userDao.validateOldPass(formUser.getUid(), formUser.getLoginpass());
+			if (!flag)
+				throw new UserException("当前密码错误");
+			userDao.updatePassword(formUser.getUid(), formUser.getNewpass());
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }

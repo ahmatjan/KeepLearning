@@ -258,6 +258,7 @@ public class UserServlet extends BaseServlet {
 	 * @param formUser
 	 * @param session
 	 * @return
+	 * TODO
 	 */
 	private Map<String, String> validateLoginParameters(User formUser,
 			HttpSession session) {
@@ -270,4 +271,90 @@ public class UserServlet extends BaseServlet {
 		Map<String, String> errors = new HashMap<String, String>();
 		return errors;
 	}
+
+
+	/**
+	 * 修改密码
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public String updatePassword(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		/*
+		 * 1.封装表单数据为JavaBean	
+		 * 2.表单数据校验
+		 * 3.调用userService修改密码
+		 * 4.如果捕获了异常，则request域中存入数据[msg e.getMessage()][user“表单信息”]，转发到pwd.jsp ----over
+		 * 5.保存成功信息，转发msg.jsp
+		 */
+		User formUser = CommonUtils.toBean(req.getParameterMap(), User.class);
+		User sessionUser = (User) req.getSession().getAttribute("sessionUser");
+		if (sessionUser == null) {
+			req.setAttribute("msg", "您还没有登陆！");
+			return "f:/jsps/user/login.jsp";
+		}
+		formUser.setUid(sessionUser.getUid());
+
+		Map<String, String> errors = validateUpdatePasswordParameters(formUser, req.getSession());
+		if (errors.size() > 0) {
+			req.setAttribute("errors", errors);
+			req.setAttribute("user", formUser);
+			return "f:/jsps/user/pwd.jsp";
+		}
+
+		try {
+			userService.updatePassword(formUser);
+		} catch (UserException e) {
+			req.setAttribute("msg", e.getMessage());
+			req.setAttribute("user", formUser);
+			return "f:/jsps/user/pwd.jsp";
+		}
+
+		req.setAttribute("code", "success");
+		req.setAttribute("msg", "修改密码成功！");
+		return "f:/jsps/msg.jsp";
+	}
+
+	/**
+	 * 校验修改密码时的表单参数
+	 * @param formUser
+	 * @param session
+	 * @return
+	 */
+	private Map<String, String> validateUpdatePasswordParameters(User formUser,
+			HttpSession session) {
+		/*
+		 * 1.校验旧用户名
+		 * 2.校验新密码
+		 * 3.校验验证码
+		 */
+
+		Map<String, String> errors = new HashMap<String, String>();
+		return errors;
+	}
+
+	/**
+	 * 用户模块退出登陆功能
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public String logout(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		req.getSession().invalidate();
+		return "r:/jsps/user/login.jsp";
+	}
 }
+
+
+
+
+
+
+
+

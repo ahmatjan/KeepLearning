@@ -185,12 +185,22 @@
 
 	UserService#updatePassword(User)
 		> 调用userDao#validateOldPass来校验旧密码是否正确
-		> 如果返回值为false，则抛出异常：密码错误
+		> 如果返回值为false，则抛出异常：当前密码错误
 		> 调用userDao#updatePassword来修改密码
 
 	UserDao
 		> #validateOldPass(String uid, String oldPass) 校验旧密码是否正确
 		> #updatePassword(String uid, String newPass) 修改密码
+
+#### 2.5 用户注销模块
+	
+	top.jsp
+		> 退出
+
+	UserServlet
+		> 摧毁session
+		> 重定向到login.jsp
+
 
 
 

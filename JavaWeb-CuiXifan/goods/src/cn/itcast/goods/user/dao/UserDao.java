@@ -88,4 +88,28 @@ public class UserDao {
 		return qr.query(sql, new BeanHandler<User>(User.class), formUser.getLoginname(), formUser.getLoginpass());
 	}
 
+	/**
+	 * 验证用户当前密码是否正确
+	 * @param uid
+	 * @param loginpass
+	 * @return
+	 * @throws SQLException 
+	 */
+	public boolean validateOldPass(String uid, String loginpass) throws SQLException {
+		String sql = "SELECT COUNT(*) FROM t_user WHERE uid=? AND loginpass=?";
+		Number num = (Number) qr.query(sql, new ScalarHandler(), uid, loginpass);
+		return num.intValue() == 1;
+	}
+
+	/**
+	 * 修改用户当前
+	 * @param uid
+	 * @param newpass
+	 * @throws SQLException 
+	 */
+	public void updatePassword(String uid, String newpass) throws SQLException {
+		String sql = "UPDATE t_user SET loginpass=? WHERE uid=?";
+		qr.update(sql, newpass, uid);
+	}
+
 }
