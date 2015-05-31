@@ -221,7 +221,7 @@ public class UserServlet extends BaseServlet {
 		 * 3.调用userService#login()方法
 		 * 4.得到的返回值如果是null，request域中存入数据[msg“用户名/密码错误”][user“用户名、密码、注册码”]，转发到login.jsp ----over
 		 * 5.得到的返回值user的状态如果是false，则request域中存入数据[msg“用户尚未激活请立即激活”][user“用户名、密码、注册码”]，转发到login.jsp ----over
-		 * 6.得到的返回值user的loginname存入session中，loginname的url编码存入cookie中，转发到index.jsp
+		 * 6.得到的返回值user的存入session中，loginname的url编码存入cookie中，转发到index.jsp
 		 */
 		User formUser = CommonUtils.toBean(req.getParameterMap(), User.class);
 
@@ -246,7 +246,7 @@ public class UserServlet extends BaseServlet {
 			return "f:/jsps/user/login.jsp";
 		}
 
-		req.getSession().setAttribute("loginname", user.getLoginname());
+		req.getSession().setAttribute("sessionUser", user);
 		Cookie cookie = new Cookie("loginname", URLEncoder.encode(user.getLoginname(), "UTF-8"));
 		cookie.setMaxAge(60 * 24 * 10);
 		resp.addCookie(cookie);
