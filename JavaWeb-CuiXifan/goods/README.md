@@ -1,5 +1,5 @@
 
-### 1 网上书城功能模块划分
+### 1 功能模块划分
 
 #### 1.1 项目前台功能模块
 	* User 用户模块
@@ -53,7 +53,7 @@
 
 
 
-### 2 用户模块分析
+### 2 前台——用户模块分析
 #### 2.1 用户注册模块
 
 	1. AJAX异步请求
@@ -202,7 +202,23 @@
 		> 重定向到login.jsp
 
 
+### 3 前台——分类模块分析
+#### 3.1 显示所有分类
+	main.jsp
+		> iframe访问CategoryServlet?method=findAll
 
+	CategoryServlet#findAll()
+		> 调用categoryService#findAll()
+		> 得到的返回值存入request域[parents“所有一级分类”]
+		> 转发到left.jsp
+
+	CategoryService#findAll()
+		> 调用categoryDao#findAll()，并返回得到的返回值
+
+	CategoryService#findAll()
+		> 得到所有一级分类
+		> 为每个一级分类添加其所有的二级分类
+		> 返回一级分类
 
 
 

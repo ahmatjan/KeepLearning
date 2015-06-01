@@ -25,8 +25,16 @@ var bar = new Q6MenuBar("bar", "图书购买交流平台");
 $(function() {
 	bar.colorStyle = 4;
 	bar.config.imgDir = "<c:url value='/menu/img/'/>";
-	bar.config.radioButton=true;
+	bar.config.radioButton=false;
 
+	<c:forEach items="${parents}" var="parent">
+		<c:forEach items="${parent.children}" var="child">
+ 			bar.add('${parent.cname}', '${child.cname}', '/goods/jsps/book/list.jsp', 'body'); 
+		</c:forEach>
+	</c:forEach>
+
+	/*
+	//四个参数分别为：一级分类名称、二级分类名称、点击跳转的页面、显示的框架页
 	bar.add("程序设计", "Java Javascript", "/goods/jsps/book/list.jsp", "body");
 	bar.add("程序设计", "JSP", "/goods/jsps/book/list.jsp", "body");
 	bar.add("程序设计", "C C++ VC VC++", "/goods/jsps/book/list.jsp", "body");
@@ -42,6 +50,7 @@ $(function() {
 	bar.add("操作系统/系统开发", "Windows", "/goods/jsps/book/list.jsp", "body");
 	bar.add("操作系统/系统开发", "Linux", "/goods/jsps/book/list.jsp", "body");
 	bar.add("操作系统/系统开发", "系统开发", "/goods/jsps/book/list.jsp", "body");
+	*/
 	
 	$("#menu").html(bar.toString());
 });
