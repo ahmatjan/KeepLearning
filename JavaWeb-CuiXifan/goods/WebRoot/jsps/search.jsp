@@ -45,8 +45,9 @@
   </head>
   
   <body>
-    <form action="<c:url value='/jsps/book/list.jsp'/>" method="get" target="body" id="form1">
-    	<input type="hidden" name="method" value=""/>
+	<!--此处为了在Servlet中解析url方便，采用了get方式提交表单 -->
+    <form action="<c:url value='/BookServlet'/>" method="get" target="body" id="form1">
+    	<input type="hidden" name="method" value="findByBname"/>
     	<input type="text" name="bname"/>
     	<span>
     		<a href="javascript:document.getElementById('form1').submit();"><img align="top" border="0" src="../images/btn.bmp"/></a>

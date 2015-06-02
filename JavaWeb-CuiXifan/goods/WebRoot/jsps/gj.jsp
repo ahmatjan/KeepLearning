@@ -20,12 +20,16 @@
 		color: #404040;
 		font-size: 10pt;
 	}
+
+	.inputPriceRange {
+		width: 75px;
+	}
 </style>
   </head>
   
   <body>
-  <form action="<c:url value='/jsps/book/list.jsp'/>" method="get">
-  	<input type="hidden" name="method" value=""/>
+  <form action="<c:url value='/BookServlet'/>" method="get">
+  	<input type="hidden" name="method" value="findByCombination"/>
 <table align="center">
 	<tr>
 		<td>书名：</td>
@@ -38,6 +42,11 @@
 	<tr>
 		<td>出版社：</td>
 		<td><input type="text" name="press"/></td>
+	</tr>
+	<tr>
+		<td>售价范围：</td>
+		<td><input type="text" class="inputPriceRange" name="priceRangeLeft"/> ～ 
+		<input type="text" class="inputPriceRange" name="priceRangeRight"/></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>

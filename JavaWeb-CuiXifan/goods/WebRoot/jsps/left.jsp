@@ -25,11 +25,11 @@ var bar = new Q6MenuBar("bar", "图书购买交流平台");
 $(function() {
 	bar.colorStyle = 4;
 	bar.config.imgDir = "<c:url value='/menu/img/'/>";
-	bar.config.radioButton=false;
+	bar.config.radioButton=true;
 
 	<c:forEach items="${parents}" var="parent">
 		<c:forEach items="${parent.children}" var="child">
- 			bar.add('${parent.cname}', '${child.cname}', '/goods/jsps/book/list.jsp', 'body'); 
+ 			bar.add('${parent.cname}', '${child.cname}', '${pageContext.request.contextPath}/BookServlet?method=findByCategory&cid=${child.cid}', 'body'); 
 		</c:forEach>
 	</c:forEach>
 

@@ -53,7 +53,7 @@
 
 
 
-### 2 前台——用户模块分析
+### 2 前台 —— 用户模块分析
 #### 2.1 用户注册模块
 
 	1. AJAX异步请求
@@ -202,7 +202,7 @@
 		> 重定向到login.jsp
 
 
-### 3 前台——分类模块分析
+### 3 前台 —— 分类模块分析
 #### 3.1 显示所有分类
 	main.jsp
 		> iframe访问CategoryServlet?method=findAll
@@ -220,6 +220,107 @@
 		> 为每个一级分类添加其所有的二级分类
 		> 返回一级分类
 
+
+### 4 前台 —— 图书模块分析
+
+#### 4.1 模块划分
+	> 按分类查看图书（分页）
+	> 按书名查看图书（分页、模糊）
+	> 按作者查看图书（分页、模糊）
+	> 按出版社查看图书（分页、模糊）
+	> 组合查询（分页、模糊）
+	> 查看图书详细
+
+#### 4.2 JavaBean分析
+	JSP页面需要以下信息：
+		> pc: PageCode, 当前页码
+		> tp: TotalPage, 总页码
+		> beanList: BeanList, 图书列表信息
+		> url: 查询时所带的条件（请求的url、以及各种参数）
+
+	Servlet需要以下信息：
+		> pc: PageCode, 当前页码 —— 默认为1，如果页面传递了数据，以页面数据为准
+		> tp: TotalPage, 总页码 —— 由 tr(TotalRecord)和ps(PageSize)计算得来
+		> tr: TotalRecord, 总记录数 —— SELECT COUNT(*)获得
+		> ps: PageSize, 每页记录书 —— 业务数据，应该来自配置文件
+		> beanList: BeanList, 图书列表 —— 通过bookDao的查询得到
+		> url：查询时所带的各种条件（req.getRequestURI() + req.getQueryString() - pc参数）
+
+#### 4.3 图书模块流程分析
+	各种JSP文件
+		> BookServlet?method=findByXxx()&yy=yy
+
+	list.jsp
+		> 遍历pageBean对象，列出图书
+	
+	pager.jsp
+		> 计算页码的begin和end
+			* 如果总页数<=6，
+					则begin=1，end=${pb.tp}
+			* 否则
+					设置begin=${pb.pc-2}, end=${pb.pc+3}
+					* 如果 begin<1
+						则设置begin=1，end=6
+					* 如果 end>${pb.tp}
+						则设置begin=${pb.tp-5} end=${pb.tp}
+
+		> 显示页码列表（从begin到end）、当前页高亮显示（pc）
+		> 显示上一页（如果begin>1）、显示下一页（如果end<pb.tp）
+		> 显示点点点（如果end<pb.tp）
+		> 显示共${pb.tp}页
+		> 页码跳转：进行输入检查，执行跳转
+						
+
+	BookServlet#findByXxx
+		> 获取各种参数：pc（默认为1）、yy、url(req.getRequestURI + req.getQuery - pc)
+		> 根据参数调用userService#findByXxx获得PageBean
+		> 给返回的PageBean设置url
+		> 把pageBean存入request域，转发到list.jsp
+
+	BookService#findXxx()
+		> 返回调用bookDao#findXxx()所得返回值
+
+	BookDao
+		* #findByXxx()
+			> 读取配置文件中的ps
+			> 配置Expression对象
+			> 调用findByCriteria()获得pageBean对象
+			> 返回pageBean对象
+
+		* #findByCriteria(int pc, int ps, List<Expression> criteria)
+			> 根据 pc和criteria 构造SQL语句
+			> SQL查询出tr\beanList
+			> 查询出 tr\beanList 元素，并构造pageBean对象
+			> 返回pageBean对象
+
+#### 4.4 查看图书详细流程分析
+  lisp.jsp
+		> method=load&bid=xxx
+		> 点击“书名”或者“图书图片”
+
+	desc.jsp
+		> 显示图书详细信息
+
+	BookServlet#load()
+		> 获取bid
+		> 调用userService#load()
+		> 返回结果存入request，转发到desc.jsp
+
+	BookService#load()
+		> 调用userDao#findByBid()
+		> 并返回调用结果
+
+	BookDao#findByDao()
+		> 根据bid在数据库中查询结果放到map中去
+		> 把map中的数据映射到Book和Category中，并进行组装
+		> 返回Book
+
+		
+		
+
+
+
+		
 
 
 
