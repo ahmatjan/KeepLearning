@@ -181,7 +181,7 @@ CREATE TABLE `t_cartitem` (
 
 /*Data for the table `t_cartitem` */
 
-insert  into `t_cartitem`(`cartItemId`,`quantity`,`bid`,`uid`,`orderBy`) values ('B8939FC55131469CAB11E3924D40185B',1,'CE01F15D435A4C51B0AD8202A318DCA7','xxx',11);
+insert  into `t_cartitem`(`cartItemId`,`quantity`,`bid`,`uid`,`orderBy`) values ('B8939FC55131469CAB11E3924D40185B',1,'CE01F15D435A4C51B0AD8202A318DCA7','531D8A16D524478D86F8A115FE95D93F',11);
 
 /*Table structure for table `t_category` */
 

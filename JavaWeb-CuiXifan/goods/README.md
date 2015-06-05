@@ -316,7 +316,144 @@
 		> 返回Book
 
 		
+
+### 5 前台 —— 购物车分析
+	cn.itcast.goods.cart
+		.domain.CartItem
+		.web.servlet.CartItemServlet
+		.service.CartItemService
+		.dao.CartItemDao
 		
+#### 3.1 我的购物车
+
+	top.jsp
+		> 我的购物车，请求CartItemServlet?method=myCart
+
+	list.jsp
+		> 显示购物清单
+
+	CartItemServlet#myCart()
+		> 从session中提取uid
+		> 调用cartItemService#myCart()来获取CartItemList
+		> cartItemList保存到request域中
+		> 转发到/jsps/cart/list.jsp
+
+	CartItemService#myCart()
+		> 返回CartItemDao#myCart的调用结果
+
+	CartItemDao#myCart()
+		> 数据库中查询当前用户对应的 购物车条目列表List<Map>  （注：多表组合查询）
+		> 把 购物车条目列表List<Map> 映射成 CartItem\Book\User，并进行组装
+
+
+#### 3.2 添加购物车条目
+
+	/book/desc.jsp#立即购买
+		> 把bid、quantity、method=add 传递给Servlet
+
+	list.jsp
+		> 显示购物列表
+
+	list.jsp#JavaScript	
+		全选复选框#点击
+		> 所有购物条目的复选框：和全选复选框 一致
+		> 总计重新计算
+		> 结算按钮：生效失效和全选复选框 一致
+
+		各购物条目复选框#点击
+		> 全选复选框：所有购物条目都被选中，则选中；其他情况下，取消。
+		> 总计重新计算
+		> 结算按钮：所有购物条目取消选中，则失效；其他情况下，生效。
+
+	list.jsp#HTML
+		修改页面相关元素id，使各元素前缀为当前购物条目的cartItemId
+		> 复选框的值，carItemId
+		> 小计的id，cartItemId+Subtotal
+		> 减按钮，cartItemId+Jian
+		> 加按钮，cartItemId+Jia
+		> 数量显示，cartItemId+Quantity
+
+
+	CartItemServlet#add()
+		> 把quantity、bid、seesionUser.uid封装成一个CartItem
+		> 调用cartItemService.add(cartItem)方法完成添加购物条目
+		> 调用 myCart(req, resp)后跳转到 list.jsp
+
+	CartItemService#add(CartItem)
+		> 调用cartItemDao.findByBidAndUid(bid, uid)查询cartItem是否存在于数据库中
+		> 如果返回值不为null，把cartItem中的quantity和新添加的数量相加后，调用cartItemDao.updateQuantity(cartItemId, quantity)修改数据库中该购物车条目的数量。
+		> 如果返回值为null，则先给cartItem添加一个cartItemId，然后调用 cartItemDao.addCartItem()在数据库中添加一条购物车条目
+
+	CartItemDao
+		> #findByBidAndUid(bid, uid) 根据Bid和Uid查询cartItem是否存在于数据库中
+		> #updateQuantity(cartItemId, quantity) 修改数据库中某购物条目的数量
+		> #addCartItem(cartItem) 添加购物条目
+
+#### 3.3 （批量）删除购物车条目
+
+	list.jsp
+		> #删除：/CartItemServlet?method=batchDelete&cartItemIds=xxx
+		> #批量删除：/CartItemServlet?method=batchDelete&cartItemIds=xxx   被删除的购物车条目的cartItemId通过“,”连接成字符串，使用JavaScript完成。
+
+	CartItemServlet#batchDelete()
+		> 获取cartItemIds参数
+		> 调用cartItemService#batchDelete()完成删除功能
+		> 返回购物车页面
+
+	CartItemService#batchDelete()
+		> 调用cartItemDao#batchDelete()完成删除
+
+	CartItemDao#batchDelete()
+		> 把 cartItemIds由字符串划分成数组
+		> 生成 whereSql子句
+		> 把Delete子句和whereSql子句连接在一起，执行之
+
+#### 3.4 修改购物车条目的数量
+
+	list.jsp
+		> $.ajax({data: {method: ajaxUpdateQuantity, cartItemId: xxx, quantity:xxx});
+		> 调用成功后，根据返回的数量和小计，更改页面
+
+	CartItemServlet#ajaxUpdateQuantity()
+		> 获取cartItemId和quantity
+		> 调用cartItemService.updateQuantity(cartItemId, quantity)修改数量
+		> 把返回值的quantity和subtotal转换成json格式发送给客户端
+		> 返回null
+
+	CartItemService#updateQuantity(cartItemId, quantity)
+		> 调用cartItemDao.updateQuantity(cartItemId, quantity)修改数量
+		> 调用cartItemDao.findByCartItemId查找CartItem
+		> 返回CartItem
+
+	CartItemDao#updateQuantity(cartItemId, quantity)
+		> #updateQuantity() 修改购物条目数量
+		> #findByCartItemId() 查找CartItem
+
+
+#### 3.5 查询被勾选条目
+	list.jsp#结算
+		> /CartItemServlet?method=loadCartItems&total=xxx&cartItemIds=yyy,zzz   其中xxx是总计金额；yyy,zzz等是被选中的购物车条目，通过JS来添加。
+
+	showitem.jsp
+		> 显示被勾选条目，总计
+	
+	CartItemServlet#loadCartItems()
+		> 获取参数cartItemIds、total
+		> 调用CartItemService.loadCartItems(cartItemIds)
+		> 将返回值 List<CartItem>、total存入request域中
+		> 转发到showitem.jsp中
+
+	CartItemService#loadCartItems()
+		> 调用cartItemDao.loadCartItem()并把结果返回
+
+	CartItemDao#loadCartItems()
+		> 把cartItemIds划分成数组
+		> 构造where子句
+		> 把select子句和where子句连接后进行查询（多表联合查询）
+		> 查询的结果封装成List<CartItem>返回
+
+
+	
 
 
 
