@@ -645,6 +645,22 @@
 
 
 
+#### 5.0 监听器
+
+	登陆监听器
+		1. 购物车
+		jsp: /jsps/cart/*
+		servlet: CartItemServlet
+
+		2. 订单
+		jsp: /jsps/order/*
+		servlet: OrderServlet
+
+		LoginFileter
+			> 从session中获取User
+			> 如果不存在，request域存入错误信息，转发到msg.jsp
+			> 如果存在，放行
+
 
 
 

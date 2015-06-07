@@ -138,14 +138,14 @@ public class UserServlet extends BaseServlet {
 		if (loginpass == null || loginpass.trim().isEmpty()) {
 			errors.put("loginpass", "密码不能为空");
 		} else if (loginpass.length() < 3 || loginpass.length() > 20) {
-			errors.put("loginpass", "用户名长度必须在3~20之间");
+			errors.put("loginpass", "密码长度必须在3~20之间");
 		}
 
 		String reloginpass = user.getReloginpass();
 		if (reloginpass == null || reloginpass.trim().isEmpty()) {
-			errors.put("reloginpass", "密码不能为空");
+			errors.put("reloginpass", "确认密码不能为空");
 		} else if (reloginpass.length() < 3 || reloginpass.length() > 20) {
-			errors.put("reloginpass", "用户名长度必须在3~20之间");
+			errors.put("reloginpass", "确认密码长度必须在3~20之间");
 		} else if (!reloginpass.equals(loginpass)) {
 			errors.put("reloginpass", "两次密码输入不一致");
 		}
@@ -260,15 +260,39 @@ public class UserServlet extends BaseServlet {
 	 * @return
 	 * TODO
 	 */
-	private Map<String, String> validateLoginParameters(User formUser,
+	private Map<String, String> validateLoginParameters(User user,
 			HttpSession session) {
 		/*
 		 * 1.校验用户名
 		 * 2.校验密码
 		 * 3.校验验证码
 		 */
-
 		Map<String, String> errors = new HashMap<String, String>();
+
+		String loginname = user.getLoginname();
+		if (loginname == null || loginname.trim().isEmpty()) {
+			errors.put("loginname", "用户名不能为空");
+		} else if (loginname.length() < 3 || loginname.length() > 20) {
+			errors.put("loginname", "用户名长度必须在3~20之间");
+		}
+
+		String loginpass = user.getLoginpass();
+		if (loginpass == null || loginpass.trim().isEmpty()) {
+			errors.put("loginpass", "密码不能为空");
+		} else if (loginpass.length() < 3 || loginpass.length() > 20) {
+			errors.put("loginpass", "密码长度必须在3~20之间");
+		}
+
+		String verifyCode = user.getVerifyCode();
+		String vCode = (String) session.getAttribute("vCode");
+		if (verifyCode == null || verifyCode.trim().isEmpty()) {
+			errors.put("verifyCode", "验证码不能为空");
+		} else if (verifyCode.length() != 4) {
+			errors.put("verifyCode", "验证码必须为4");
+		} else if (!verifyCode.equalsIgnoreCase(vCode)) {
+			errors.put("verifyCode", "验证码错误");
+		}
+
 		return errors;
 	}
 
@@ -324,15 +348,48 @@ public class UserServlet extends BaseServlet {
 	 * @param session
 	 * @return
 	 */
-	private Map<String, String> validateUpdatePasswordParameters(User formUser,
+	private Map<String, String> validateUpdatePasswordParameters(User user,
 			HttpSession session) {
 		/*
-		 * 1.校验旧用户名
+		 * 1.校验旧密码格式
 		 * 2.校验新密码
 		 * 3.校验验证码
 		 */
-
 		Map<String, String> errors = new HashMap<String, String>();
+
+		String loginpass = user.getLoginpass();
+		if (loginpass == null || loginpass.trim().isEmpty()) {
+			errors.put("loginpass", "旧密码不能为空");
+		} else if (loginpass.length() < 3 || loginpass.length() > 20) {
+			errors.put("loginpass", "旧密码长度必须在3~20之间");
+		}
+
+		String newpass = user.getNewpass();
+		if (newpass == null || newpass.trim().isEmpty()) {
+			errors.put("newpass", "新密码不能为空");
+		} else if (newpass.length() < 3 || newpass.length() > 20) {
+			errors.put("newpass", "新密码长度必须在3~20之间");
+		}
+
+		String reloginpass = user.getReloginpass();
+		if (reloginpass == null || reloginpass.trim().isEmpty()) {
+			errors.put("reloginpass", "确认密码不能为空");
+		} else if (reloginpass.length() < 3 || reloginpass.length() > 20) {
+			errors.put("reloginpass", "确认密码长度必须在3~20之间");
+		} else if (!reloginpass.equals(newpass)) {
+			errors.put("reloginpass", "两次密码输入不一致");
+		}
+
+		String verifyCode = user.getVerifyCode();
+		String vCode = (String) session.getAttribute("vCode");
+		if (verifyCode == null || verifyCode.trim().isEmpty()) {
+			errors.put("verifyCode", "验证码不能为空");
+		} else if (verifyCode.length() != 4) {
+			errors.put("verifyCode", "验证码必须为4");
+		} else if (!verifyCode.equalsIgnoreCase(vCode)) {
+			errors.put("verifyCode", "验证码错误");
+		}
+
 		return errors;
 	}
 

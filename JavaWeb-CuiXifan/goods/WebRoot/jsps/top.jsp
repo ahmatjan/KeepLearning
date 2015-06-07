@@ -31,12 +31,17 @@
 	a:hover {
 		text-decoration:underline;
 	}
+
+	#logo {
+		float: left;
+	}
 </style>
   </head>
   
   <body>
-<h1 style="text-align: center;">图书购买交流平台</h1>
-<div style="font-size: 10pt; line-height: 10px;">
+    <div id="logo"><a href="${pageContext.request.contextPath}"><img src="<c:url value='/images/logo3.gif'/>" /></a></div>
+	<h1 style="text-align: center;">图书购买交流平台</h1>
+	<div style="font-size: 10pt; line-height: 10px;">
 
 	<c:choose>
 		<c:when test="${empty sessionUser}">

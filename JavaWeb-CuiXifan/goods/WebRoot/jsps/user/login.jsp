@@ -35,7 +35,7 @@
   
   <body>
 	<div class="main">
-	  <div><img src="<c:url value='/images/logo.gif'/>" /></div>
+	  <div><a href="${pageContext.request.contextPath}"><img src="<c:url value='/images/logo3.gif'/>" /></a></div>
 	  <div>
 	    <div class="imageDiv"><img class="img" src="<c:url value='/images/zj.png'/>"/></div>
         <div class="login1">
@@ -68,19 +68,19 @@
                     </tr>
                     <tr>
                       <td height="20">&nbsp;</td>
-                      <td><label id="loginpassError" class="error">${errors.password}</label></td>
+                      <td><label id="loginpassError" class="error">${errors.loginpass}</label></td>
                     </tr>
                     <tr>
                       <td>验证码</td>
                       <td>
-                        <input class="input yzm" type="text" name="verifyCode" id="verifyCode" value=""/>
+                        <input class="input yzm" type="text" name="verifyCode" id="verifyCode" value="${user.verifyCode}"/>
                         <img id="vCode" src="${pageContext.request.contextPath}/VerifyCodeServlet"/>
                         <a href="javascript:changeAnOtherImg()" id="verifyCode">换张图</a>
                       </td>
                     </tr>
                     <tr>
                       <td height="20px">&nbsp;</td>
-                      <td><label id="verifyCodeError" class="error"></label></td>
+                      <td><label id="verifyCodeError" class="error">${errors.verifyCode}</label></td>
                     </tr>
                     <tr>
                       <td>&nbsp;</td>
