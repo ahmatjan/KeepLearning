@@ -283,15 +283,13 @@
 	BookDao
 		* #findByXxx()
 			> 读取配置文件中的ps
-			> 配置Expression对象
-			> 调用findByCriteria()获得pageBean对象
-			> 返回pageBean对象
+			> 配置List<Expression>
+			> 调用findByCriteria()获得pageBean对象，并返回
 
 		* #findByCriteria(int pc, int ps, List<Expression> criteria)
 			> 根据 pc和criteria 构造SQL语句
 			> SQL查询出tr\beanList
-			> 查询出 tr\beanList 元素，并构造pageBean对象
-			> 返回pageBean对象
+			> 查询出 tr\beanList 元素，并构造pageBean对象，并返回
 
 #### 4.4 查看图书详细流程分析
   lisp.jsp
@@ -317,7 +315,7 @@
 
 		
 
-### 5 前台 —— 购物车分析
+### 3 前台 —— 购物车分析
 	cn.itcast.goods.cart
 		.domain.CartItem
 		.web.servlet.CartItemServlet
@@ -453,11 +451,198 @@
 		> 查询的结果封装成List<CartItem>返回
 
 
+### 4 前台 —— 订单模块分析
+
+	1. 生成订单
+	2. 我的订单（分页）
+	3. 查看订单详细信息
+	4. 取消订单
+	5. 确认收货
+	6. 准备支付
+	----在线支付介绍
+	7. 订单支付（去银行的界面）
+	8. 银行回馈（修改状态为已支付）
+		
+#### 4.1 我的订单
+
+	top.jsp
+		> 我的购物车，请求OrderServlet?method=myOrder
+
+	list.jsp
+		> 显示订单
+		> 通过pager.jsp显示页码
+
+	OrderServlet#myOrder()
+		> 获取参数 pc、url(request.getRequestURI + request.getRequestQueryString - pc)
+		> 获取sessionUser.getUid()
+		> 调用orderService.myOrder()获得pageBean
+		> 为pageBean设置url
+		> pageBean存入request域，转发到list.jsp
+
+	OrderService#myOrder()
+		> 调用orderDao.myOrder()并返回所得pageBean（以上放在一个事物中）
+
+	OrderDao
+		* myOrder(int pc)
+			> 获取ps
+			> 构造List<Expression>
+			> 调用findByCriteria得到pageBean并返回
+
+
+		* findByCriteria(int pc, int ps, List)
+			> 根据pc、ps、criteria构造SQL语句
+			> 执行SQL语句，得到tr、beanList
+			> 为beanList中每个Order，添加其所拥有的OrderItem
+			> 根据pc\ps\tr\beanList 构造PageBean对象，并返回
+
+
+#### 4.2 生成订单
+
+	/cart/showitem.jsp
+		> #提交订单： 请求 /OrderServlet?method=createOrder&cartItemIds=xxx,yyy&address=...
+
+	/order/ordersucc.jsp
+		> 显示 订单编号、合计金额、收货地址等
+
+	OrderServlet#createOrder()
+		> 根据 address\sessionUser等信息创建Order
+		> 根据cartItemIds获得List<CartItemOrder>，进而创建List<OrderItem>
+		> 把List<OrderItem>添加到CartItemOrder上去
+		> 调用OrderService#createOrder()来向数据库中插入数据
+		> request域中保存order，转发到 /order/ordersucc.jsp去
+
+	OrderServlet#createOrder()
+		> 调用orderDao#add()完成订单的添加（以上需要放到事物中完成）
+
+	OrderServlet#add()
+		> 在t_order表中添加数据
+		> 在t_orderitem表中添加数据，运用批处理来完成
+
+
+#### 4.3 查看订单详细
+
+	list.jsp
+		> #点击订单编号 #查看 #取消 #确认收货    /OrderServlet?method=load&oid=xxx&btn=cancel/confirm
+
+	desc.jsp
+		> 显示订单相关的各种信息。
+		> 如果状态为1，显示“立即支付”；如果状态为1且btn=cancel，显示取消订单；如果状态为3且btn=confirm，显示确认收货。
+
+	OrderServlet#load()
+		> 获取参数oid和btn
+		> 调用orderService#load(oid)
+		> 把返回的Order和btn存入request域中
+		> 转发至desc.jsp
+
+	OrderService#load()
+		> 调用orderDao.load()，然后返回结果
+
+	OrderDao#load(oid)
+		> 根据oid到数据库中查询Order
+		> 为Order填充OrderItem
+		> 返回Order
+
+		
+#### 4.4 取消订单
+	desc.jsp
+		> 取消订单： /OrderServlet?method=cancel&oid=xxx
+
+	msg.jsp
+		> 显示成功或失败信息
+
+	OrderServlet#cancel()
+		> 获取参数oid
+		> 调用orderService.findStatusByOid() 查看订单状态是否为1：如果不是则request域中存入错误信息后，转发到msg.jsp
+		> 调用orderService.updateStatus() 修改订单状态为5
+		> request域中存入成功信息后，转发到msg.jsp
+
+	OrderService
+		> #findStatusByOid() 查看订单状态
+		> #updateStatus() 更改订单状态
+
+	OrderDao
+		> #findStatusByOid() 查看订单状态
+		> #updateStatus() 更改订单状态
+
+#### 4.5 确认收货（和取消订单类似）
+	desc.jsp
+		> 确认收货： /OrderServlet?method=confirm&oid=xxx
+
+	msg.jsp
+		> 显示成功或失败信息
+
+	OrderServlet#confirm()
+		> 获取参数oid
+		> 调用orderService.findStatusByOid() 查看订单状态是否为3：如果不是则request域中存入错误信息后，转发到msg.jsp
+		> 调用orderService.updateStatus() 修改订单状态为4
+		> request域中存入成功信息后，转发到msg.jsp
+
+	OrderService
+		> #findStatusByOid() 查看订单状态
+		> #updateStatus() 更改订单状态
+
+	OrderDao
+		> #findStatusByOid() 查看订单状态
+		> #updateStatus() 更改订单状态
+
+
+#### 4.6 支付准备
+	
+	list.jsp#支付 /OrderServlet?method=paymentPrepare&oid=xxx
+	desc.jsp#支付
+	ordersucc.jsp#支付
+	
+
+	pay.jsp
+		> 显示支付相关信息
+
+	OrderServlet#paymentPrepare()
+		> 获取参数oid
+		> 调用orderService.load(oid)
+		> 把返回结果存入request域，转发到pay.jsp
+
+	OrderService#load()
+		> 调用orderDao.load()并返回结果
+
+	OrderDao#load(oid)
+		> 根据oid查询Order并返回结果
+
+
+#### 4.7 支付
+
+	pay.jsp
+		> #下一步： /OrderServlet?method=payment&oid=xxx&yh=yyy
+
+	OrderServlet#payment()
+		> 获取oid和yh
+		> 准备13个参数，生成第14个参数
+		> 重定向到易宝（易宝支付url + 14个参数）
+
+	易宝和银行模块
+		> 易宝进行一下验证和处理
+		> 重定向到银行支付页面
+		> 用户输入账号密码校验
+		> 银行账号之间进行转账操作
+		> 银行返回信息给易宝
+
 	
 
 
+#### 4.8 支付返回
 
-		
+	易宝
+		> 用户重定向：引导用户重定向到 /OrderServlet?若干参数
+		> 点对点反馈：把信息反馈给 /OrderServlet?若干参数
+
+
+	OrderServlet#paymentBack()
+		> 获取前12个参数
+		> 校验第13个参数，如果没有校验通过，保存错误信息到request域，转发到msg.jsp
+		> 调用orderService.updateStatus()修改订单状态
+		> 检查r9这个参数，
+			* 如果是2，返回一个"success"
+			* 否则，request域中存入成功信息，转发到msg.jsp中
+
 
 
 

@@ -21,21 +21,22 @@
   
 <body>
 	<div class="divOrder">
-		<span>订单号：E3A1EB6D0543489F9729B2B5BC5DB365
-			(等待付款)
-<!-- 
-			(准备发货)
-			(等待确认)
-			(交易成功)
-			(已取消)
- -->
-		　　　下单时间：2013-06-01 19:30:22</span>
+		<span>订单号：${order.oid}
+		<c:choose>
+			<c:when test="${order.status==1}">(等待付款)</c:when>
+			<c:when test="${order.status==2}">(准备发货)</c:when>
+			<c:when test="${order.status==3}">(等待确认)</c:when>
+			<c:when test="${order.status==4}">(交易成功)</c:when>
+			<c:when test="${order.status==5}">(已取消)</c:when>
+		</c:choose>
+
+		　　　下单时间：${order.ordertime}</span>
 	</div>
 	<div class="divContent">
 		<div class="div2">
 			<dl>
 				<dt>收货人信息</dt>
-				<dd>山东省 威海市 环翠区 文化西路2号 张三</dd>
+				<dd>${order.address}</dd>
 			</dl>
 		</div>
 		<div class="div2">
@@ -52,64 +53,25 @@
 
 
 
-
+					<c:forEach var="orderItem" items="${order.orderItemList}">
 						<tr style="padding-top: 20px; padding-bottom: 20px;">
 							<td class="td" width="400px">
 								<div class="bookname">
-								  <img align="middle" width="70" src="<c:url value='/book_img/23254532-1_b.jpg'/>"/>
-								  <a href="<c:url value='/jsps/book/desc.jsp'/>">Spring实战(第3版)（In Action系列中最畅销的Spring图书，近十万读者学习Spring的共同选择）</a>
+								  <img align="middle" width="70" src="<c:url value='${orderItem.book.image_b}'/>"/>
+								  <a href="<c:url value='/BookServlet?method=load&bid=${orderItem.book.bid}'/>">${orderItem.book.bname}</a>
 								</div>
 							</td>
 							<td class="td" >
-								<span>&yen;40.7</span>
+								<span>&yen;${orderItem.book.currPrice}</span>
 							</td>
 							<td class="td">
-								<span>1</span>
+								<span>${orderItem.quantity}</span>
 							</td>
 							<td class="td">
-								<span>&yen;40.7</span>
+								<span>&yen;${orderItem.subtotal}</span>
 							</td>			
 						</tr>
-
-
-
-
-
-						<tr style="padding-top: 20px; padding-bottom: 20px;">
-							<td class="td" width="400px">
-								<div class="bookname">
-								  <img align="middle" width="70" src="<c:url value='/book_img/23254532-1_b.jpg'/>"/>
-								  <a href="<c:url value='/jsps/book/desc.jsp'/>">Spring实战(第3版)（In Action系列中最畅销的Spring图书，近十万读者学习Spring的共同选择）</a>
-								</div>
-							</td>
-							<td class="td" >
-								<span>&yen;40.7</span>
-							</td>
-							<td class="td">
-								<span>1</span>
-							</td>
-							<td class="td">
-								<span>&yen;40.7</span>
-							</td>			
-						</tr>
-						<tr style="padding-top: 20px; padding-bottom: 20px;">
-							<td class="td" width="400px">
-								<div class="bookname">
-								  <img align="middle" width="70" src="<c:url value='/book_img/23254532-1_b.jpg'/>"/>
-								  <a href="<c:url value='/jsps/book/desc.jsp'/>">Spring实战(第3版)（In Action系列中最畅销的Spring图书，近十万读者学习Spring的共同选择）</a>
-								</div>
-							</td>
-							<td class="td" >
-								<span>&yen;40.7</span>
-							</td>
-							<td class="td">
-								<span>1</span>
-							</td>
-							<td class="td">
-								<span>&yen;40.7</span>
-							</td>			
-						</tr>
-
+					</c:forEach>
 
 					</table>
 				</dd>
@@ -117,11 +79,19 @@
 		</div>
 		<div style="margin: 10px 10px 10px 550px;">
 			<span style="font-weight: 900; font-size: 15px;">合计金额：</span>
-			<span class="price_t">&yen;203.5</span><br/>
+			<span class="price_t">&yen;${order.total}</span><br/>
 
-	<a href="<c:url value='/jsps/order/pay.jsp'/>" class="pay"></a><br/>
-    <a id="cancel" href="javascript:alert('订单已取消！');">取消订单</a><br/>
-	<a id="confirm" href="javascript:alert('交易成功！');">确认收货</a><br/>	
+	<c:if test="${order.status==1}">
+		<a href="<c:url value='/OrderServlet?method=paymentPrepare&oid=${order.oid}'/>" class="pay"></a><br/>
+	</c:if>
+
+	<c:if test="${order.status==1 and btn=='cancel'}">
+   		<a id="cancel" href="${pageContext.request.contextPath}/OrderServlet?method=cancel&oid=${order.oid}">取消订单</a><br/>
+	</c:if>
+
+	<c:if test="${order.status==3 and btn=='confirm'}">
+		<a id="confirm" href="${pageContext.request.contextPath}/OrderServlet?method=confirm&oid=${order.oid}">确认收货</a><br/>	
+	</c:if>
 		</div>
 	</div>
 </body>
