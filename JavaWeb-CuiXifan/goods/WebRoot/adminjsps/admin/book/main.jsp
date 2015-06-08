@@ -25,7 +25,7 @@
 			<iframe frameborder="0" src="<c:url value='/adminjsps/admin/book/left.jsp'/>" name="left"></iframe>
 		</td>
 		<td>
-			<iframe frameborder="0" src="<c:url value='/adminjsps/admin/book/body.jsp'/>" name="body"></iframe>
+			<iframe scrolling="no" frameborder="0" src="<c:url value='/adminjsps/admin/book/body.jsp'/>" name="body"></iframe>
 		</td>
 	</tr>
 </table>

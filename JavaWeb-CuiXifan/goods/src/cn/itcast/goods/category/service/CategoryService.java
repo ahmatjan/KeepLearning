@@ -26,4 +26,91 @@ public class CategoryService {
 		}
 	}
 
+	/**
+	 * 添加一级分类
+	 * @param parent
+	 */
+	public void add(Category category) {
+		try {
+			categoryDao.add(category);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 查找所有一级分类
+	 * @return
+	 */
+	public List<Category> findParents() {
+		try {
+			return categoryDao.findParents();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 加载单个Category
+	 * @param cid
+	 * @return
+	 */
+	public Category load(String cid) {
+		try {
+			return categoryDao.load(cid);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 修改Category信息
+	 * @param category
+	 */
+	public void update(Category category) {
+		try {
+			categoryDao.update(category);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 查找一级分类的子分类数据
+	 * @param cid
+	 * @return
+	 */
+	public int findChilrenCountByParent(String cid) {
+		try {
+			return categoryDao.findChildrenCountByParent(cid);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 删除分类
+	 * @param cid
+	 */
+	public void delete(String cid) {
+		try {
+			categoryDao.delete(cid);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 查询二级分类下的图书数量
+	 * @param cid
+	 * @return
+	 */
+	public int findBookCountByCategory(String cid) {
+		try {
+			return categoryDao.findBookCountByCategory(cid);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }

@@ -39,8 +39,8 @@
   </head>
   
   <body>
-    <div id="logo"><a href="${pageContext.request.contextPath}"><img src="<c:url value='/images/logo3.gif'/>" /></a></div>
-	<h1 style="text-align: center;">图书购买交流平台</h1>
+    <div id="logo"><a href="${pageContext.request.contextPath}" target="_parent"><img src="<c:url value='/images/logo2.gif'/>" /></a></div>
+	<h1 style="margin-left: 450px;">图书购买交流平台</h1>
 	<div style="font-size: 10pt; line-height: 10px;">
 
 	<c:choose>

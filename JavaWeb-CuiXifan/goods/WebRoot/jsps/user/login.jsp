@@ -35,7 +35,7 @@
   
   <body>
 	<div class="main">
-	  <div><a href="${pageContext.request.contextPath}"><img src="<c:url value='/images/logo3.gif'/>" /></a></div>
+	  <div><a href="${pageContext.request.contextPath}" target="_parent"><img src="<c:url value='/images/logo2.gif'/>" /></a></div>
 	  <div>
 	    <div class="imageDiv"><img class="img" src="<c:url value='/images/zj.png'/>"/></div>
         <div class="login1">

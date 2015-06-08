@@ -31,12 +31,12 @@
 		<td class="tdLeft" rowspan="2">
 			<iframe frameborder="0" src="${pageContext.request.contextPath}/CategoryServlet?method=findAll" name="left"></iframe>
 		</td>
-		<td class="tdSearch" style="border-bottom-width: 0px;">
+		<td class="tdSearch">
 			<iframe frameborder="0" src="<c:url value='/jsps/search.jsp'/>" name="search"></iframe>
 		</td>
 	</tr>
 	<tr>
-		<td class="tdBody" style="border-top-width: 0px;">
+		<td class="tdBody">
 			<iframe frameborder="0" src="<c:url value='/jsps/body.jsp'/>" name="body"></iframe>
 		</td>
 	</tr>

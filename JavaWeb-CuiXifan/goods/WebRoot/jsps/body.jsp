@@ -16,12 +16,9 @@
 	<meta http-equiv="description" content="This is my page">
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
 	
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-<style type="text/css">
-a {text-decoration: none;}
-</style>
+	<style type="text/css">
+		a {text-decoration: none;}
+	</style>
   </head>
   
   <body>

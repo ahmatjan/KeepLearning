@@ -6,7 +6,7 @@
 <html>
   <head>
     
-    <title>main.jsp</title>
+    <title>后台管理</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -22,13 +22,13 @@
   
   <body>
 <table class="table" align="center">
-	<tr>
-		<td colspan="2" align="center" height="100px;">
+	<tr class="trTop">
+		<td colspan="2" class="tdTop">
 			<iframe frameborder="0" src="<c:url value='/adminjsps/admin/top.jsp'/>" name="top"></iframe>
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td class="tdBody">
 			<iframe frameborder="0" src="<c:url value='/adminjsps/admin/body.jsp'/>" name="body"></iframe>
 		</td>
 	</tr>

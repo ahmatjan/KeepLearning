@@ -18,19 +18,20 @@
 <style type="text/css">
 	body {font-size: 10pt;}
 	a {color: #aaa;}
+
+	#logo {float: left;}
 </style>
   </head>
   
   <body style="background: rgb(78,78,78);color: #fff;">
-<h1 style="text-align: center; line-height: 30px;">购买交流系统后台管理</h1>
-<div style="line-height: 10px;">
-	<span>管理员：刘备备</span>
-	<a target="_top" href="<c:url value='/adminjsps/login.jsp'/>">退出</a>
-	<span style="padding-left:50px;">
-		<a href="<c:url value='/adminjsps/admin/category/list.jsp'/>">分类管理</a>
-		<a href="<c:url value='/adminjsps/admin/book/main.jsp'/>">图书管理</a>
-		<a href="<c:url value='/adminjsps/admin/order/list.jsp'/>">订单管理</a>
-	</span>
-</div>
+    <div id="logo"><a href="${pageContext.request.contextPath}/adminjsps/admin" target="_parent"><img src="<c:url value='/images/logo2.gif'/>" /></a></div>
+	<h1 style="text-align: center; line-height: 30px;" id="title">图书购买交流平台后台管理</h1>
+	<div style="font-size: 10pt; line-height: 10px;">
+		管理员：${sessionAdmin.adminname}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+		<a href="<c:url value='/admin/AdminCategoryServlet?method=findAll'/>">分类管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+		<a href="<c:url value='/adminjsps/admin/book/main.jsp'/>">图书管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+		<a href="<c:url value='/adminjsps/admin/order/list.jsp'/>">订单管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+		<a target="_parent" href="<c:url value='/AdminServlet?method=logout'/>">退出</a>
+	</div>
   </body>
 </html>

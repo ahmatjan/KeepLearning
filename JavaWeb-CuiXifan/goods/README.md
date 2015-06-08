@@ -1,7 +1,7 @@
 
-### 1 功能模块划分
+## 1 功能模块划分
 
-#### 1.1 项目前台功能模块
+### 1.1 项目前台功能模块
 	* User 用户模块
 		> 用户注册
 		> 用户登陆
@@ -36,7 +36,7 @@
 		> 取消订单
 		> 确认收货
 
-#### 1.2 项目后台功能模块
+### 1.2 项目后台功能模块
 	* 管理员模块
 		> 管理员登陆
 		> 管理员退出
@@ -52,9 +52,9 @@
 
 
 
-
-### 2 前台 —— 用户模块分析
-#### 2.1 用户注册模块
+## 2 前台
+### 2.1 前台 —— 用户模块分析
+#### 2.1.1 用户注册模块
 
 	1. AJAX异步请求
 	regist.jsp
@@ -97,7 +97,7 @@
 	UserDao#add()
 		> 数据库中插入用户
 	
-#### 2.3 用户激活模块
+#### 2.1.2 用户激活模块
 	激活邮件
 		> 激活链接
 
@@ -122,7 +122,7 @@
 
 
 
-#### 2.3 用户登陆模块
+#### 2.1.3 用户登陆模块
 	1. AJAX异步请求
 	login.jsp
 		> 验证码是否正确
@@ -158,7 +158,7 @@
 		> 根据user的用户名密码进行查询，返回结果
 
 
-#### 2.4 用户修改密码模块
+#### 2.1.4 用户修改密码模块
 
 	1. AJAX异步请求
 	pwd.jsp
@@ -192,7 +192,7 @@
 		> #validateOldPass(String uid, String oldPass) 校验旧密码是否正确
 		> #updatePassword(String uid, String newPass) 修改密码
 
-#### 2.5 用户注销模块
+#### 2.1.5 用户注销模块
 	
 	top.jsp
 		> 退出
@@ -202,8 +202,8 @@
 		> 重定向到login.jsp
 
 
-### 3 前台 —— 分类模块分析
-#### 3.1 显示所有分类
+### 2.2 前台 —— 分类模块分析
+#### 2.2.1 显示所有分类
 	main.jsp
 		> iframe访问CategoryServlet?method=findAll
 
@@ -221,9 +221,9 @@
 		> 返回一级分类
 
 
-### 4 前台 —— 图书模块分析
+### 2.3 前台 —— 图书模块分析
 
-#### 4.1 模块划分
+#### 2.3.1 模块划分
 	> 按分类查看图书（分页）
 	> 按书名查看图书（分页、模糊）
 	> 按作者查看图书（分页、模糊）
@@ -231,7 +231,7 @@
 	> 组合查询（分页、模糊）
 	> 查看图书详细
 
-#### 4.2 JavaBean分析
+#### 2.3.2 JavaBean分析
 	JSP页面需要以下信息：
 		> pc: PageCode, 当前页码
 		> tp: TotalPage, 总页码
@@ -246,7 +246,7 @@
 		> beanList: BeanList, 图书列表 —— 通过bookDao的查询得到
 		> url：查询时所带的各种条件（req.getRequestURI() + req.getQueryString() - pc参数）
 
-#### 4.3 图书模块流程分析
+#### 2.3.3 图书模块流程分析
 	各种JSP文件
 		> BookServlet?method=findByXxx()&yy=yy
 
@@ -291,7 +291,7 @@
 			> SQL查询出tr\beanList
 			> 查询出 tr\beanList 元素，并构造pageBean对象，并返回
 
-#### 4.4 查看图书详细流程分析
+#### 2.3.4 查看图书详细流程分析
   lisp.jsp
 		> method=load&bid=xxx
 		> 点击“书名”或者“图书图片”
@@ -315,14 +315,14 @@
 
 		
 
-### 3 前台 —— 购物车分析
+### 2.4 前台 —— 购物车分析
 	cn.itcast.goods.cart
 		.domain.CartItem
 		.web.servlet.CartItemServlet
 		.service.CartItemService
 		.dao.CartItemDao
 		
-#### 3.1 我的购物车
+#### 2.4.1 我的购物车
 
 	top.jsp
 		> 我的购物车，请求CartItemServlet?method=myCart
@@ -344,7 +344,7 @@
 		> 把 购物车条目列表List<Map> 映射成 CartItem\Book\User，并进行组装
 
 
-#### 3.2 添加购物车条目
+#### 2.4.2 添加购物车条目
 
 	/book/desc.jsp#立即购买
 		> 把bid、quantity、method=add 传递给Servlet
@@ -387,7 +387,7 @@
 		> #updateQuantity(cartItemId, quantity) 修改数据库中某购物条目的数量
 		> #addCartItem(cartItem) 添加购物条目
 
-#### 3.3 （批量）删除购物车条目
+#### 2.4.3 （批量）删除购物车条目
 
 	list.jsp
 		> #删除：/CartItemServlet?method=batchDelete&cartItemIds=xxx
@@ -406,7 +406,7 @@
 		> 生成 whereSql子句
 		> 把Delete子句和whereSql子句连接在一起，执行之
 
-#### 3.4 修改购物车条目的数量
+#### 2.4.4 修改购物车条目的数量
 
 	list.jsp
 		> $.ajax({data: {method: ajaxUpdateQuantity, cartItemId: xxx, quantity:xxx});
@@ -428,7 +428,7 @@
 		> #findByCartItemId() 查找CartItem
 
 
-#### 3.5 查询被勾选条目
+#### 2.4.5 查询被勾选条目
 	list.jsp#结算
 		> /CartItemServlet?method=loadCartItems&total=xxx&cartItemIds=yyy,zzz   其中xxx是总计金额；yyy,zzz等是被选中的购物车条目，通过JS来添加。
 
@@ -451,7 +451,7 @@
 		> 查询的结果封装成List<CartItem>返回
 
 
-### 4 前台 —— 订单模块分析
+### 2.5 前台 —— 订单模块
 
 	1. 生成订单
 	2. 我的订单（分页）
@@ -463,7 +463,7 @@
 	7. 订单支付（去银行的界面）
 	8. 银行回馈（修改状态为已支付）
 		
-#### 4.1 我的订单
+#### 2.5.1 我的订单
 
 	top.jsp
 		> 我的购物车，请求OrderServlet?method=myOrder
@@ -496,7 +496,7 @@
 			> 根据pc\ps\tr\beanList 构造PageBean对象，并返回
 
 
-#### 4.2 生成订单
+#### 2.5.2 生成订单
 
 	/cart/showitem.jsp
 		> #提交订单： 请求 /OrderServlet?method=createOrder&cartItemIds=xxx,yyy&address=...
@@ -519,7 +519,7 @@
 		> 在t_orderitem表中添加数据，运用批处理来完成
 
 
-#### 4.3 查看订单详细
+#### 2.5.3 查看订单详细
 
 	list.jsp
 		> #点击订单编号 #查看 #取消 #确认收货    /OrderServlet?method=load&oid=xxx&btn=cancel/confirm
@@ -543,7 +543,7 @@
 		> 返回Order
 
 		
-#### 4.4 取消订单
+#### 2.5.4 取消订单
 	desc.jsp
 		> 取消订单： /OrderServlet?method=cancel&oid=xxx
 
@@ -564,7 +564,7 @@
 		> #findStatusByOid() 查看订单状态
 		> #updateStatus() 更改订单状态
 
-#### 4.5 确认收货（和取消订单类似）
+#### 2.5.5 确认收货（和取消订单类似）
 	desc.jsp
 		> 确认收货： /OrderServlet?method=confirm&oid=xxx
 
@@ -586,7 +586,7 @@
 		> #updateStatus() 更改订单状态
 
 
-#### 4.6 支付准备
+#### 2.5.6 支付准备
 	
 	list.jsp#支付 /OrderServlet?method=paymentPrepare&oid=xxx
 	desc.jsp#支付
@@ -608,7 +608,7 @@
 		> 根据oid查询Order并返回结果
 
 
-#### 4.7 支付
+#### 2.5.7 支付
 
 	pay.jsp
 		> #下一步： /OrderServlet?method=payment&oid=xxx&yh=yyy
@@ -628,7 +628,7 @@
 	
 
 
-#### 4.8 支付返回
+#### 2.5.8 支付返回
 
 	易宝
 		> 用户重定向：引导用户重定向到 /OrderServlet?若干参数
@@ -645,7 +645,7 @@
 
 
 
-#### 5.0 监听器
+### 2.6 前台 —— 监听器
 
 	登陆监听器
 		1. 购物车
@@ -661,6 +661,227 @@
 			> 如果不存在，request域存入错误信息，转发到msg.jsp
 			> 如果存在，放行
 
+
+
+## 3 后台
+	1. 管理员模块
+	2. 分类模块
+	3. 图书模块
+	4. 订单模块
+	----------
+	JSP位置：			除了login.jsp & msg.jsp放在 /WebRoot/adminjsps 之外，其他放在 /WebRoot/adminjsps/admin
+
+	Servlet位置：	cn.itcast.admin包下
+	Servlet命名：	除AdminServlet之外，前面额外添加一个Admin，如 AdminBookServlet、AdminCategoryServlet
+	Servlet url：	除AdminServlet之外，都以/admin开头，如 /admin/AdminBookServlet、/admin/AdminCategoryServlet
+	
+		
+
+
+### 3.1 后台 —— 管理员模块
+	cn.itcast.goods.admin.admin.domain.Admin
+	cn.itcast.goods.admin.admin.dao.AdminDao
+	cn.itcast.goods.admin.admin.service.AdminService
+	cn.itcast.goods.admin.admin.web.servlet.AdminServlet
+
+#### 3.1.1 登陆功能
+	login.jsp
+		> 登陆： /AdminServlet?method=login&adminname=xx&adminpass=yy
+
+	AdminServlet#login()
+		> 获取参数adminname和adminpass
+		> 调用AdminService.login()，得到返回对象admin
+		> 如果admin为空，则request域中存入错误信息后，转发到 /adminjsps/login.jsp
+		> session中存入管理员相关信息
+		> 转发到/adminjsps/admin/index.jsp
+
+	AdminService#login()
+		> 调用adminDao.findAdminByNameAndPass()
+
+	AdminDao#findAdminByNameAndPass()
+		> 数据库中根据帐号名和密码查询管理员，结果封装成Admin返回
+
+#### 3.1.2 退出功能
+	top.jsp
+		> 退出 /AdminServlet?method=logout
+
+	AdminServlet#logout()
+		> 使session失效
+		> 重定向到/goods/adminjsps/login.jsp
+
+### 3.2 后台 —— 分类模块
+
+#### 3.2.1 查看所有分类
+	top.jsp
+		> 分类管理：/admin/AdminCategoryServlet?method=findAll
+
+  list.jsp
+    > 显示所有分类
+
+  AdminCategoryServlet?method=findAll
+    > 调用categoryService.findAll()获取所有分类
+    > 把返回结果保存到request域
+    > 转发到/adminjsps/admin/category/list.jsp
+
+  CategoryService && CategoryDao
+    > 略
+
+
+#### 3.2.2 添加一、二级分类
+
+1. 添加一级分类
+  add.jsp
+    > 添加一级分类：/admin/AdminCategoryServlet?method=addParent&cname=xxx&desc=yyy
+
+  AdminCategoryServlet#addParent()
+    > 把参数封装为表单 Category parent
+    > 调用categoryServlet.addParent(parent)完成添加功能
+    > return findAll();
+
+  CategoryService#addParent()
+    > 调用categoryDao.add()完成添加
+
+  CategoryDao#add(category)
+    > 构造sql语句
+    > 判断category.getParent()是否为空
+      * 如果为空，pid设为null
+      * 否则设为category.getParent().getPid()
+    > 执行sql语句
+
+2.1 添加二级分类 Part 1
+
+  list.jsp
+    > 添加二级分类：/admin/AdminCategoryServlet?method=preAddChild&pid=x
+
+  add2.jsp
+    > 下拉框显示一级分类，并把pid对应的一级分类选中
+
+  AdminCategoryServlet#preAddChild()
+    > 获取参数pid
+    > 调用categoryService#findParents()获取所有一级分类 parents
+    > 把parents\pid存入request域中，转发到add2.jsp
+
+  CategoryService#findParents()
+    > 调用categoryDao.findParent()，并返回结果
+
+  CategoryDao#findParent()
+    > 查找所有一级分类并返回
+
+
+2.2 添加二级分类 Part 2
+
+  add2.jsp
+    > 添加二级分类：/admin/AdminCategoryServlet?method=addParent?pid=x&cnam=y&desc=z
+
+  AdminCategoryServlet#add
+    > 把参数封装进Category child中；获取pid，封装为一个Category parent；child设置parent
+    > 调用categoryService#addChild()完成添加二级分类
+    > return findAll();
+
+  CategoryService && CategoryDao
+    > 略
+
+#### 3.2.1 编辑一、二级分类
+
+1.1 修改一级分类 Part1
+  list.jsp
+    > 修改： /admin/AdminCategory?method=preEdiParentt&cid=x
+
+  edit.jsp
+    > 显示Category信息
+
+  AdminCategoryServlet#preEditParent()
+    > 获取cid
+    > 调用categoryService.load()进行加载
+    > 返回值category放入request域，转发到edit.jsp中
+
+  CategoryService#load()
+    > 略
+
+  CategoryDao#load()
+    > 在数据库中查询指定分类，并把查询结果封装封装到一个map中。
+    > 把map封装到一个category中。封装时先检测有无父分类，如果有则把pid封装成一个Category，然后赋给前一个category。
+
+1.2 修改一级分类 Part2
+  edit.jsp
+    > 修改： > /admin/AdminCategory?method=editParent&cid=x&cname=y&desc=z
+
+  AdminCategoryServlet#editParent()
+    > 参数封装为Category对象
+    > 调用categoryService修改
+    > return findAll()
+
+  CategoryService
+    > 略
+
+  CategoryDao#update()
+    > 修改category，要注意的是要考虑category可能有父分类，也可能没有父分类，因此要加一个if判断一下。
+
+2.1 修改二级分类 Part1
+  list.jsp
+    > 修改： /admin/AdminCategory?method=preEdiChild&cid=x
+
+  edit2.jsp
+    > 显示Category信息
+
+  AdminCategoryServlet#preEditChild()
+    > 获取cid
+    > 调用categoryService.load()进行加载，调用categoryService.findParents()获取所有一级分类。
+    > 返回值category放入request域，转发到edit.jsp中
+
+  CategoryService && CategoryDao
+    > 略
+
+2.2 修改二级分类 Part2
+  edit2.jsp
+    > 修改： > /admin/AdminCategory?method=editParent&cid=x&cname=y&desc=z
+
+  AdminCategoryServlet#editChild()
+    > 参数封装为Category对象，注意pid要单独封装成一个Category parent然后赋给前一个Category
+    > 调用categoryService.update()修改
+    > return findAll()
+
+  CategoryService && CategoryDao
+    > 略
+
+#### 3.2.1 删除一、二级分类
+
+1. 删除一级分类
+  list.jsp
+    > 删除 /admin/AdminCategoryServlet?method=deleteParent&cid=xxx
+
+  msg.jsp
+    > 显示错误信息
+
+  AdminCategoryServlet
+    > 获取cid
+    > 查询该分类下是否有二级分类(categoryService.findChildrenCountByParent(cid))
+      * 如果有，request域中保存错误信息，转发到msg.jsp中
+      * 如果没有，删除该分类；return findAll()
+
+  CategoryService && CategoryDao #findChildrenCountByParent()
+    > 略
+
+2. 删除二级分类
+  list.jsp
+    > 删除 /admin/AdminCategoryServlet?method=deleteChild&cid=xxx
+
+  msg.jsp
+    > 显示错误信息
+
+  AdminCategoryServlet
+    > 获取cid
+    > 查询该分类下是否有二级分类(categoryService.findBookCountByCategory(cid))
+      * 如果有，request域中保存错误信息，转发到msg.jsp中
+      * 如果没有，删除该分类；return findAll();
+
+  CategoryService && CategoryDao #findChildrenCountByParent()
+    > 略
+
+
+### 3.3 后台 —— 图书模块
+
+### 3.4 后台 —— 订单模块
 
 
 
