@@ -881,6 +881,129 @@
 
 ### 3.3 后台 —— 图书模块
 
+功能模块：
+	1. 显示所有分类（通过手风琴式下拉菜单）
+	2. 按分类查询图书
+	3. 按作者查询图书
+	4. 按出版社查询图书
+	5. 组合查询
+	6. 查看图书详细
+	----以上模块和前台基本一样----
+	7. 添加图书
+	8. 编辑图书
+	9. 删除图书
+
+类的创建：
+	1. cn.itcast.goods.admin.book.AdminBookServlet
+	2. cn.itcast.goods.admin.book.AdminAddBookServlet
+		因为上传表单的enctype="mutipart/formdata"，所以不能使用request.getParameter()，进而也不能使用BaseServlet。
+		所以上传功能要单独占用一个Servlet。
+
+#### 3.3.7 添加图书
+1. 准备添加图书
+	main.jsp
+		> 添加图书： /AdminBookServlet?method=preAddBook
+
+	add.jsp
+		> 显示所有一级分类信息
+
+	AdminBookServlet#preAddBook
+		> 调用categoryService.findParents()的到所有一级分类
+		> 把一级分类列表存入request域，转发到 add.jsp
+
+	serivce && dao
+		> 略
+
+2. 异步响应二级分类
+	add.jsp
+		> 一级分类变化，调用AdminBookServlet.ajaxFindChildren()获得获得对应的二级分类，然后添加到二级分类的下拉列表中
+
+	AdminBookServlet#ajaxFindChildren
+		> 调用categoryService.findChildren(cid)获取对应的二级分类列表
+		> 将二级分类转化成为JSON后，返回到客户端
+
+	service && dao
+		> 略
+
+3. 提交表单，进行添加图书
+	add.jsp
+		> 新书上架 /AdminBookServlet?method=add&各种表单项
+
+	AdminAddBookServlet#method=add
+		> 使用 commons-fileupload组件完成三步解析，得到List<FileItem>
+		> 把 List<FileItem>转换成为一个Map中
+		> 使用Map生成一个Book，使用Map生成一个Category，把Category赋给Book
+		> ----
+		> 对文件名进行截取（文件名称可能是绝对路径）
+		> 对文件拓展名进行校验，如果不是jpg或者png，则保存错误转发到add.jsp
+		> 检测图片大小，如果长宽大于 350*350，则保存错误到request域后转发到add.jsp
+		> 给文件名加上uuid前缀（保证文件名唯一）
+		> 给文件名添加上 book_img路径
+		> 文件名赋给book对象
+		> 使用ServletContext.getRealPath()获取真实路径
+		> 保存文件
+		> ----
+		> 文件小图的检验同上
+		> ----
+		> 调用bookService.add(book)添加图书
+		> 保存添加成功信息，转发到msg
+
+	bookService && bookDao
+		> add(book) 添加图书
+	
+
+#### 3.3.8 编辑图书
+1. 准备修改图书
+	list.jsp
+		> 点击书名： /AdminBookServlet?method=load&bid=xxx
+
+	desc.jsp
+		> 显示图书详细	
+
+	service && dao
+		> 略
+
+2. 异步响应二级分类
+	desc.jsp
+		> 一级分类下拉框改变，ajax请求 /AdminBookServlet?method=findChildren&pid=xxx
+
+	service && dao #findChildren
+		> 略
+
+3. 提交表单，编辑图书
+	desc.jsp
+		> /AdminBookServlet?method=edit&各种 表单信息
+
+	msg.jsp
+		> 显示结果信息
+
+	AdminBookServlet#edit()
+		> 表单数据封装成Book，封装成Category，然后Category赋给Book
+		> 调用service编辑图书
+
+	service && dao #edit()
+		> 略
+	
+
+
+#### 3.3.9 删除图书
+	desc.jsp
+		> /AdminBookServlet?method=delete&bid=xxx
+
+	msg.jsp
+		> 显示结果信息
+
+	AdminBookServlet#delete()
+		> 根据bid，service加载图书
+		> 获取大小图，删除图片
+		> service.delete()删除图书
+		> 保存信息到msg.jsp
+
+	service && dao #delete()
+		> 略
+
+
+
 ### 3.4 后台 —— 订单模块
 
 

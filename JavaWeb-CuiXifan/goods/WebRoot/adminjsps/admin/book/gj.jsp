@@ -24,8 +24,8 @@
   </head>
   
   <body>
-  <form action="<c:url value='/adminjsps/admin/book/list.jsp'/>" method="get">
-  	<input type="hidden" name="method" value="findByCriteria"/>
+  <form action="<c:url value='/admin/AdminBookServlet'/>" method="get">
+  	<input type="hidden" name="method" value="findByCombination"/>
 <table align="center">
 	<tr>
 		<td>书名：</td>
@@ -39,6 +39,12 @@
 		<td>出版社：</td>
 		<td><input type="text" name="press"/></td>
 	</tr>
+	<tr>
+		<td>售价范围：</td>
+		<td><input type="text" class="inputPriceRange" name="priceRangeLeft"/> ～ 
+		<input type="text" class="inputPriceRange" name="priceRangeRight"/></td>
+	</tr>
+	<tr>
 	<tr>
 		<td>&nbsp;</td>
 		<td>

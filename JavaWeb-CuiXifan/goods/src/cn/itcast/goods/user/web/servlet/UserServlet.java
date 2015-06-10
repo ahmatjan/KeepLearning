@@ -71,6 +71,7 @@ public class UserServlet extends BaseServlet {
 		String vCode = (String) request.getSession().getAttribute("vCode");
 		String verifyCode = request.getParameter("verifyCode");
 		response.getWriter().print(vCode.equalsIgnoreCase(verifyCode));
+
 		return null;
 	}
 

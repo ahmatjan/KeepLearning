@@ -17,7 +17,6 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<link rel="stylesheet" type="text/css" href="<c:url value='/jsps/pager/pager.css'/>" />
-    <script type="text/javascript" src="<c:url value='/jsps/pager/pager.js'/>"></script>
     <link rel="stylesheet" type="text/css" href="<c:url value='/adminjsps/admin/css/order/list.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/css.css'/>" />
 

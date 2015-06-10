@@ -1,7 +1,7 @@
 * {font-size: 10pt;}
 body {text-align: center;}
-.table {width:1200px; height: 100%; border: 1px solid gray; border-collapse: collapse;}
+.table {width:100%; height: 100%; border: 1px solid gray; border-collapse: collapse;}
 .table td {border: 1px solid gray; }
 .tdTop {text-align: center; height: 100px;}
-.tdBody{border-top-width: 0px; height: 1050px; border-top-width: 0px;}
+.tdBody{border-top-width: 0px; height: 100%; border-top-width: 0px; }
 iframe {width: 100%; height: 100%;}
