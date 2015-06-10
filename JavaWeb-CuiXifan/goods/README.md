@@ -1006,6 +1006,89 @@
 
 ### 3.4 后台 —— 订单模块
 
+	1. 查询所有订单
+	2. 按状态查询订单
+	3. 查询订单详细，（点击不同的链接，显示不同的按钮）
+		> 点击订单号或查看时，没有按钮
+		> 点击取消按钮时，有取消按钮
+		> 点击发货按钮时，有发货按钮
+	4. 取消订单
+	5. 发货
+
+#### 3.4.1 查询所有订单
+	main.jsp
+		> 添加图书：/AdminOrderServlet?method=findAll	
+
+	list.jsp
+		> 使用两层嵌套循环来显示订单列表
+
+	AdminOrderServlet#findAll()  （参考前台我的订单来实现）
+		> （参考OderServlet#myOrder()来实现findAll()）
+
+	OrderService#findAll()
+		> （参考OrderSerivce#myOrder()来实现）
+
+	OrderDao#findAll()
+		> （参考OderDao.findByUser()来实现）
+
+#### 3.4.2 按状态查询订单
+	list.jsp
+		> 未付款、已付款...： /AdminOrderServlet?method=findByStatus&status=xxx
+
+	list.jsp
+		> 使用两层嵌套循环来显示订单列表
+
+	AdminOrderServlet#findByStatus()
+		> （参考findByUser来实现）
+
+	service && dao
+		> 略
+
+#### 3.4.3 查看订单详细
+	list.jsp
+		> 点击 订单号/查看/取消/发货 ： AdminOrderServlet?method=load&oid=xxx&btn=zz
+
+	desc.jsp
+		> 显示订单信息
+		> 根据btn参数来显示各种按钮
+
+	AdminOrderServlet#load（）
+		> （参考前台查看订单来实现）
+
+	service && dao
+		> 略
+	
+#### 3.4.4 取消订单
+	desc.jsp
+		> 取消订单： AdminOrderServlet?method=cancel&oid=xx
+
+	msg.jsp
+		> 显示取消订单成功
+
+	AdminOrderServlet#cancel()
+		> （参考OrderServlet.cancel()来实现）
+
+	service && dao
+		> 略
+		
+
+#### 3.4.5 发货
+	desc.jsp
+		> 发货： AdminOrderServlet?method=deliver&oid=xx
+
+	msg.jsp
+		> 显示发货成功
+
+	AdminOrderServlet#deliver()
+		> （参考OrderServlet.cancel()来实现）
+
+	service && dao
+		> 略
+
+
+### 3.5 过滤器
+	AdminLoginFilter
+		> 对 /adminjsps/admin/* 和 /admin/* 的内容进行过滤
 
 
 
