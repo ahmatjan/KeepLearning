@@ -1,6 +1,7 @@
 package cn.itcast.goods.order.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import cn.itcast.goods.order.dao.OrderDao;
 import cn.itcast.goods.order.domain.Order;
@@ -25,7 +26,7 @@ public class OrderService {
 		try {
 			JdbcUtils.beginTransaction();
 
-			PageBean<Order> pb = orderDao.myOrder(pc, uid);
+			PageBean<Order> pb = orderDao.findByUser(pc, uid);
 
 			JdbcUtils.commitTransaction();
 
@@ -91,6 +92,33 @@ public class OrderService {
 	public void updateStatus(String oid, int status) {
 		try {
 			orderDao.updateStatus(oid, status);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 查找所有订单
+	 * @param pc 
+	 * @return
+	 */
+	public PageBean<Order> findAll(int pc) {
+		try {
+			return orderDao.findAll(pc);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 按状态查找订单
+	 * @param pc
+	 * @param status
+	 * @return
+	 */
+	public PageBean<Order> findByStatus(int pc, int status) {
+		try {
+			return orderDao.findByStatus(pc, status);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

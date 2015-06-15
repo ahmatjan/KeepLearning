@@ -30,7 +30,7 @@
 		管理员：${sessionAdmin.adminname}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
 		<a href="<c:url value='/admin/AdminCategoryServlet?method=findAll'/>">分类管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 		<a href="<c:url value='/adminjsps/admin/book/main.jsp'/>">图书管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-		<a href="<c:url value='/adminjsps/admin/order/list.jsp'/>">订单管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="<c:url value='/admin/AdminOrderServlet?method=findAll'/>">订单管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
 		<a target="_parent" href="<c:url value='/AdminServlet?method=logout'/>">退出</a>
 	</div>
   </body>

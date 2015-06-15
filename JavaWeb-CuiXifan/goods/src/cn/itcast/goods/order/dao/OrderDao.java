@@ -35,7 +35,7 @@ public class OrderDao {
 	 * @return
 	 * @throws SQLException 
 	 */
-	public PageBean<Order> myOrder(int pc, String uid) throws SQLException {
+	public PageBean<Order> findByUser(int pc, String uid) throws SQLException {
 		/*
 		 * 获取ps
 		 * 构造List<Expression>
@@ -201,5 +201,44 @@ public class OrderDao {
 	public void updateStatus(String oid, int status) throws SQLException {
 		String  sql = "UPDATE t_order SET status=? WHERE oid=?";
 		qr.update(sql, status, oid);
+	}
+
+	/**
+	 * 查找所有订单
+	 * @param pc 
+	 * @return
+	 * @throws SQLException 
+	 */
+	public PageBean<Order> findAll(int pc) throws SQLException {
+		/*
+		 * 获取ps
+		 * 构造List<Expression>
+		 * 调用findByCriteria得到pageBean并返回
+		 */
+		int ps = PageConstants.ORDER_PAGE_SIZE;
+		List<Expression> criteria = new ArrayList<Expression>();
+
+		return findByCriteria(pc, ps, criteria);
+	}
+
+	/**
+	 * 按状态查找订单
+	 * @param pc
+	 * @param status
+	 * @return 
+	 * @throws SQLException 
+	 */
+	public PageBean<Order> findByStatus(int pc, int status) throws SQLException {
+		/*
+		 * 获取ps
+		 * 构造List<Expression>
+		 * 调用findByCriteria得到pageBean并返回
+		 */
+		int ps = PageConstants.ORDER_PAGE_SIZE;
+
+		List<Expression> criteria = new ArrayList<Expression>();
+		criteria.add(new Expression("status", "=", status+""));
+
+		return findByCriteria(pc, ps, criteria);
 	}
 }
