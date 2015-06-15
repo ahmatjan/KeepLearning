@@ -83,7 +83,7 @@
 	</tr>
 	<tr>
 		<td colspan="6">
-			<input id="addr" type="text" name="address" value="山东省 威海市 环翠区 文化西路2号 张三"/>
+			<input id="addr" type="text" name="address" value="山东省 威海市 环翠区 XXXX 张三"/>
 		</td>
 	</tr>
 	<tr>

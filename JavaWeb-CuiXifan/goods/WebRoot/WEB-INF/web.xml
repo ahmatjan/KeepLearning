@@ -44,6 +44,11 @@
     <servlet-name>AdminOrderServlet</servlet-name>
     <servlet-class>cn.itcast.goods.admin.order.web.servlet.AdminOrderServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CommentServlet</servlet-name>
+    <servlet-class>cn.itcast.goods.comment.web.servlet.CommentServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>VerifyCodeServlet</servlet-name>
     <url-pattern>/VerifyCodeServlet</url-pattern>
@@ -87,6 +92,10 @@
   <servlet-mapping>
     <servlet-name>AdminOrderServlet</servlet-name>
     <url-pattern>/admin/AdminOrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CommentServlet</servlet-name>
+    <url-pattern>/CommentServlet</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>EncodingFilter</filter-name>

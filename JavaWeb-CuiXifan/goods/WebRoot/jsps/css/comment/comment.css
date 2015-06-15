@@ -1,0 +1,11 @@
+#divComment {clear: left; width: 1000px;}
+.divCommentItem {border: 1px solid grey; height: 180px; border-bottom: 0; width: 900px;}
+.divMember {float: left; margin: 25px 15px 15px 15px; height: 100px; width: 75px;}
+.divPortrait {text-align: center;}
+.divName {text-align: center; width: 70px;}
+.divContent {float: left; margin: 20px 15px 15px 15px; height: 100px; width: 700px; border: 1px solid grey; padding: 10px; line-height: 25px;}
+.divCommenttime {clear:left; margin-left: 700px;}
+
+#divButton {width: 700px;}
+#btnSubmit {margin-left: 200px;  margin-right: 50px;}
+#btnEmpty {margin-left: 50px;  margin-right: 200px;}

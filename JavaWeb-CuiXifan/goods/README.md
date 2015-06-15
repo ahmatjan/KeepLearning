@@ -643,9 +643,48 @@
 			* 如果是2，返回一个"success"
 			* 否则，request域中存入成功信息，转发到msg.jsp中
 
+### 2.6 前台 —— 书评模块
+		
+#### 2.6.1 查看书评
+	/jsps/book/desc.jsp
+		> <iframe src="/goods/CommentServlet?method=load&getComments&bid=xxx"><iframe>
 
+	CommentServlet#laod
+		> 获取bid
+		> 调用commentService.getComments(bid)
+		> 把返回的List<Comment>加入request域中
+		> 转发到 /jsps/comment/comment.jsp
 
-### 2.6 前台 —— 监听器
+	CommentService#load
+		> 调用CommentDao.load()，并把结果返回
+
+	CommentDao#load
+		> 查询bid的书评，封装List<Comment>后返回
+
+#### 2.6.2 添加书评
+	/jsps/comment/comment.jsp
+		> 添加书评：/goods/CommentServlet?method=load&getComments&bid=xxx&content=xx
+
+	msg.jsp
+		> 显示错误信息
+
+	CommentServlet#add
+		> 把提交数据封装为一个Comment数据
+		> 检查sessionUser是否为空，如果为空则把错误信息存入request域后转发到msg.jsp
+		> 获取sessionUser.getUid()，赋给comment
+		> 检测当前用户是否已经评论过该图书，如果是则把错误信息存入request域后转发到msg.jsp
+		> 获取当前时间，赋给comment对象的commenttime
+		> 调用commentService.add()完成添加书评
+		> return comment.load(bid)
+
+	CommentService#add
+		> 调用commentDao.add()
+
+	CommentDao#add
+		> 执行sql语句，进行comment添加
+		
+
+### 2.7 前台 —— 监听器
 
 	登陆监听器
 		1. 购物车

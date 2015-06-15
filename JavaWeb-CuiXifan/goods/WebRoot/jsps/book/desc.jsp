@@ -70,5 +70,10 @@
   		</div>	
 	</div>
   </div>
+
+  <br>
+<%-- <jsp:include page="/CommentServlet?method=getComments&bid=${book.bid}"></jsp:include> --%>
+  <iframe frameborder="0" src="${pageContext.request.contextPath}/CommentServlet?method=load&bid=${book.bid}"></iframe>
+
   </body>
 </html>
