@@ -1,6 +1,18 @@
 约束
 * 约束是添加在列上的，用来约束列的！
 
+目录：
+1. 主键约束（唯一标识）
+2. 主键自增长
+3. 非空约束
+4. 唯一约束
+5. 外键约束
+6. 概念模型
+7. 数据库一对一关系
+8. 数据库多对多关系
+
+
+
 1. 主键约束（唯一标识）
   ****非空***
   ****唯一***
@@ -8,23 +20,25 @@
 
   * 当表的某一列被指定为主键后，该列就不能为空，不能有重复值出现。
   * 创建表时指定主键的两种方式：
-    > 
+
+    > 指定sid列为主键列，即为sid列添加主键约束
     CREATE TABLE stu(
-	sid	    CHAR(6) PRIMARY KEY,
-	sname	VARCHAR(20),
-	age		INT,
-	gender	VARCHAR(10) 
+      sid	    CHAR(6) PRIMARY KEY,
+      sname	VARCHAR(20),
+      age		INT,
+      gender	VARCHAR(10)
     );
-    指定sid列为主键列，即为sid列添加主键约束
-    > 
-    CREATE TABLE stu(
-	sid	    CHAR(6),
-	sname	VARCHAR(20),
-	age		INT,
-	gender	VARCHAR(10),
-	PRIMARY KEY(sid)
-    );
-    指定sid列为主键列，即为sid列添加主键约束
+
+    > 指定多列为共同主键约束，主键约束名为pk_PersonID
+    CREATE TABLE Persons (
+      Id_P int NOT NULL,
+      LastName varchar(255) NOT NULL,
+      FirstName varchar(255),
+      Address varchar(255),
+      City varchar(255),
+      CONSTRAINT pk_PersonID PRIMARY KEY (Id_P,LastName)
+    )
+
   * 修改表时指定主键：ALTER TABLE stu ADD PRIMARY KEY(sid);
   * 删除主键：ALTER TABLE stu DROP PRIMARY KEY;
 
@@ -65,7 +79,48 @@
   );
   * 对sname列设置了非空约束
 
-5. 概念模型
+5. 外键约束
+  * 外键必须是另一表的主键的值(外键要引用主键！)
+  * 外键可以重复
+  * 外键可以为空
+  * 一张表中可以有多个外键！
+
+
+  概念模型在数据库中成为表
+  数据库表中的多对一关系，只需要在多方使用一个独立的列来引用1方的主键即可
+  /*员工表*/
+  create talbe emp (
+    empno int primary key,/*员工编号*/
+    ...
+    deptno int/*所属部门的编号*/
+  );
+  /*部门表*/
+  create table dept (
+    deptno int  primary key,/*部门编号*/
+    ...
+  );
+  emp表中的deptno列的值表示当前员工所从属的部门编号。也就是说emp.deptno必须在dept表中是真实存在！
+  但是我们必须要去对它进行约束，不然可能会出现员工所属的部门编号是不存在的。这种约束就是外键约束。
+  我们需要给emp.deptno添加外键约束，约束它的值必须在dept.deptno中存在。外键必须是另一个表的主键！
+
+  语法：CONSTRAINT 约束名称 FOREIGN KEY(外键列名) REFERENCES 关联表(关联表的主键
+  创建表时指定外键约束
+  create talbe emp (
+    empno int primary key,
+    ...
+    deptno int,
+    CONSTRAINT fk_emp FOREIGN KEY(mgr) REFERENCES emp(empno)
+  );
+
+  修改表时添加外键约束
+  ALTER TABLE emp
+  ADD CONSTRAINT fk_emp_deptno FOREIGN KEY(deptno) REFERENCES dept(deptno);
+
+  修改表时删除外键约束
+  ALTER TABLE emp
+  DROP FOREIGN KEY fk_emp_deptno;/*约束名称*/
+
+6. 概念模型
 
 对象模型：可以双向关联，而且引用的是对象，而不是一个主键！
 关系模型：只能多方引用一方，而且引用的只是主键，而不是一整行记录。
@@ -78,7 +133,7 @@ has a(关联)
   > 1对多
   > 多对多
 use a
-  
+
 
 关系模型：在数据库中表！！！
 
@@ -119,47 +174,7 @@ use a
      private List<Student> students;
   }
 
-6. 外键约束
-  * 外键必须是另一表的主键的值(外键要引用主键！)
-  * 外键可以重复
-  * 外键可以为空
-  * 一张表中可以有多个外键！
 
-
-  概念模型在数据库中成为表
-  数据库表中的多对一关系，只需要在多方使用一个独立的列来引用1方的主键即可
-  /*员工表*/
-  create talbe emp (
-    empno int primary key,/*员工编号*/
-    ...
-    deptno int/*所属部门的编号*/
-  );
-  /*部门表*/
-  create table dept (
-    deptno int  primary key,/*部门编号*/
-    ...
-  );
-  emp表中的deptno列的值表示当前员工所从属的部门编号。也就是说emp.deptno必须在dept表中是真实存在！
-  但是我们必须要去对它进行约束，不然可能会出现员工所属的部门编号是不存在的。这种约束就是外键约束。
-  我们需要给emp.deptno添加外键约束，约束它的值必须在dept.deptno中存在。外键必须是另一个表的主键！
-
-  语法：CONSTRAINT 约束名称 FOREIGN KEY(外键列名) REFERENCES 关联表(关联表的主键) 
-  创建表时指定外键约束
-  create talbe emp (
-    empno int primary key,
-    ...
-    deptno int,
-    CONSTRAINT fk_emp FOREIGN KEY(mgr) REFERENCES emp(empno)  
-  );
-
-  修改表时添加外键约束
-  ALERT TABLE emp
-  ADD CONSTRAINT fk_emp_deptno FOREIGN KEY(deptno) REFERENCES dept(deptno);
-
-  修改表时删除外键约束
-  ALTER TABLE emp
-  DROP FOREIGN KEY fk_emp_deptno;/*约束名称*/
-  
 7. 数据库一对一关系
   在表中建立一对一关系比较特殊，需要让其中一张表的主键，即是主键又是外键。
   create table husband(
@@ -204,6 +219,3 @@ use a
   101    203 /*编号为101的学生有一个编号为203的老师*/
   102    201 /*编号为102的学生有一个编号为201的老师*/
   102    204 /*编号为102的学生有一个编号为204的老师*/
-
-
-

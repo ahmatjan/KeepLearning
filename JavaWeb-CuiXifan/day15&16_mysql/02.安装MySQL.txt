@@ -16,14 +16,13 @@
   > 该目录下的每个目录表示一个数据库，例如该目录下有一个mysql目录，那么说明你的DBMS中有一个名为mysql的database。
   > 在某个数据库目录下会有0~N个扩展名为frm的文件，每个frm文件表示一个table。你不要用文本编辑器打开它，它是由DBMS来读写的！
 
-4. my.ini，MySQL最为重要的配置文件
+4. my.ini，MySQL最为重要的配置文件 (Linux下位于/etc/mysql/下)
   > 配置MySQL的端口：默认为3306，没有必要去修改它；
   > 配置字符编码：
-    * [client]下配置客户端编码：default-character-set=gbk
+    * [client]下配置客户端编码：default-character-set=gbk  (仅Windows下需要这么设置，至于为什么参考 10.Windows下编码问题.txt)
     * [mysqld]下配置服务器编码：character-set-server=utf8
   > 配置二进制数据大小上限：
     * 在[mysqld]下配置：max_allowed_packet=8M
-  
 
 -------------------------
 

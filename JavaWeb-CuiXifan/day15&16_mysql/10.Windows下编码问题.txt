@@ -2,7 +2,7 @@
 
 1. 查看MySQL数据库编码
   * SHOW VARIABLES LIKE 'char%';
-  
+
 2. 编码解释
   * character_set_client：MySQL使用该编码来解读客户端发送过来的数据，例如该编码为UTF8，那么如果客户端发送过来的数据不是UTF8，那么就会出现乱码
   * character_set_results：MySQL会把数据转换成该编码后，再发送给客户端，例如该编码为UTF8，那么如果客户端不使用UTF8来解读，那么就会出现乱码
@@ -18,7 +18,7 @@
   * 设置变量的语句：
     > set character_set_client=gbk;
     > set character_set_results=gbk;
-  
+
   注意，设置变量只对当前连接有效，当退出窗口后，再次登录mysql，还需要再次设置变量。
   为了一劳永逸，可以在my.ini中设置：
   设置default-character-set=gbk即可。
