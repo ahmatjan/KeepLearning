@@ -105,9 +105,22 @@ public class CategoryService {
 	 * @param cid
 	 * @return
 	 */
-	public int findBookCountByCategory(String cid) {
+	public int findBookCountByCategory(String pid) {
 		try {
-			return categoryDao.findBookCountByCategory(cid);
+			return categoryDao.findBookCountByCategory(pid);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 查找某一父分类的子分类
+	 * @param cid
+	 * @return
+	 */
+	public List<Category> findChildrenByParent(String cid) {
+		try {
+			return categoryDao.findChildrenByParent(cid);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

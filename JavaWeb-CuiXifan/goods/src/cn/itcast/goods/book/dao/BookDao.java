@@ -218,11 +218,66 @@ public class BookDao {
 		 * 把map中的数据映射到Book和Category中，并进行组装
 		 * 返回Book
 		 */
-		String sql = "SELECT * FROM t_book WHERE bid=?";
+		String sql = "SELECT * FROM t_book b, t_category c WHERE bid=? AND b.cid=c.cid";
 		Map map = qr.query(sql, new MapHandler(), bid);
 		Book book = CommonUtils.toBean(map, Book.class);
 		Category category = CommonUtils.toBean(map, Category.class);
+
+		//为了desc页面加载一级分类
+		if (map.get("pid") != null) {
+			Category parent = new Category();
+			parent.setCid((String) map.get("pid"));
+			category.setParent(parent);
+		}
+
 		book.setCategory(category);
 		return book;
+	}
+
+	/**
+	 * 编辑图书
+	 * @param book
+	 * @throws SQLException 
+	 */
+	public void edit(Book book) throws SQLException {
+		String sql = "UPDATE t_book SET bname=?, author=?, price=?, currPrice=?, " 
+				+ "discount=?, press=?, publishtime=?, edition=?, pageNum=?, " 
+				+ "wordNum=?, printtime=?, booksize=?, paper=?, cid=? WHERE bid=?";
+		Object[] params = {book.getBname(), book.getAuthor(), book.getPrice(), 
+				book.getCurrPrice(), book.getDiscount(), book.getPress(), 
+				book.getPublishtime(), book.getEdition(), book.getPageNum(),
+				book.getWordNum(), book.getPrinttime(), book.getBooksize(),
+				book.getPaper(), book.getCategory().getCid(), book.getBid()};
+
+		qr.update(sql, params);
+	}
+
+	/**
+	 * 添加图书
+	 * @param book
+	 * @throws SQLException 
+	 */
+	public void add(Book book) throws SQLException {
+		String sql = "INSERT INTO t_book(bid,bname,author,price,currPrice,discount,press,publishtime,"
+				+ "edition,pageNum,wordNum,printtime,booksize,paper,cid,image_w,image_b) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] params = {book.getBid(), book.getBname(), book.getAuthor(), 
+				book.getPrice(), book.getCurrPrice(), book.getDiscount(), 
+				book.getPress(), book.getPublishtime(), book.getEdition(), 
+				book.getPageNum(), book.getWordNum(), book.getPrinttime(), 
+				book.getBooksize(), book.getPaper(), book.getCategory().getCid(), 
+				book.getImage_w(), book.getImage_b()};
+
+		qr.update(sql, params);
+	}
+
+	/**
+	 * 删除图书
+	 * @param bid
+	 * @throws SQLException 
+	 */
+	public void delete(String bid) throws SQLException {
+		String sql = "DELETE FROM t_book WHERE bid=?";
+		qr.update(sql, bid);
 	}
 }

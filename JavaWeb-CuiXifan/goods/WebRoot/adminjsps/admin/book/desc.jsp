@@ -41,7 +41,30 @@ $(function() {
 			$("#show").css("display", "");		
 		}
 	});
+
+	//父分类下拉菜单改变时修改二级分类
+	$('#pid').change(loadChildren);
 });
+
+function loadChildren() {
+	var pid = $('#pid').val();
+	$.ajax({
+		async: true,
+		cache: false,
+		url: "${pageContext.request.contextPath}/admin/AdminBookServlet",
+		data: {method: "ajaxFindChildrenByParent", pid: pid},
+		type: "POST",
+		dataType: "json",
+		success: function (arr) {
+			$('#cid').empty();
+			$('#cid').append('<option>====请选择二级分类====</option>');
+			for (var i = 0; i < arr.length; i++) {
+				var option = $('<option>').val(arr[i].cid).text(arr[i].cname);
+				$('#cid').append(option);
+			}
+		}
+	});
+}	
 
 </script>
   </head>
@@ -68,7 +91,7 @@ $(function() {
 			</tr>
 			<tr>
 				<td colspan="3">
-					出版社：${book.press}</a>
+					出版社：${book.press}
 				</td>
 			</tr>
 			<tr>
@@ -91,8 +114,8 @@ $(function() {
   
   <div id='formDiv'>
    <div class="sm">&nbsp;</div>
-   <form action="javascript:alert('编辑或删除图书成功！')" method="post" id="form">
-   	<input type="hidden" name="bid" value=""/>
+   <form action="${pageContext.request.contextPath}/admin/AdminBookServlet" method="post" id="form">
+   	<input type="hidden" name="bid" value="${book.bid}"/>
    	<input type="hidden" name="image_w" value=""/>
    	<input type="hidden" name="image_b" value=""/>
     <img align="top" src="<c:url value='/${book.image_w}'/>" class="tp"/>
@@ -131,20 +154,19 @@ $(function() {
 			</tr>
 			<tr>
 				<td>
-					一级分类：<select name="pid" id="pid" onchange="loadChildren()">
+					一级分类：<select name="pid" id="pid">
 						<option value="">==请选择1级分类==</option>
-			    		<option value="1" selected='selected'>程序设计</option>
-			    		<option value="2">办公室用书</option>
-			    		<option value="3">图形 图像 多媒体</option>
-			    		<option value="4">操作系统/系统开发</option>
+						<c:forEach var="parent" items="${parents}">
+			    		<option value="${parent.cid}" <c:if test="${parent.cid==book.category.parent.cid}">selected="selected"</c:if>>${parent.cname}</option>
+						</c:forEach>
 					</select>
 				</td>
 				<td>
 					二级分类：<select name="cid" id="cid">
-						<option value="">==请选择2级分类==</option>
-			    		<option value="1" selected='selected'>Java Javascript</option>
-			    		<option value="2">JSP</option>
-			    		<option value="3">C C++ VC VC++</option>
+						<c:forEach var="child" items="${children}">
+			    		<option value="${child.cid}" <c:if test="${child.cid==book.category.cid}">selected="selected"</c:if>>${child.cname}</option>
+						</c:forEach>
+
 					</select>
 				</td>
 				<td></td>

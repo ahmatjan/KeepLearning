@@ -171,4 +171,15 @@ public class CategoryDao {
 		return num.intValue();
 	}
 
+	/**
+	 * 查找某一分类的子分类
+	 * @param cid
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<Category> findChildrenByParent(String pid) throws SQLException {
+		String sql = "SELECT * FROM t_category WHERE pid=?";
+		return qr.query(sql, new BeanListHandler<Category>(Category.class), pid);
+	}
+
 }

@@ -23,5 +23,6 @@
   
   <body>
     <h1>欢迎进入图书购买交流平台</h1>
+    <img alt="" src="${pageContext.request.contextPath}/images/body.jpg">
   </body>
 </html>

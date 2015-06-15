@@ -466,7 +466,7 @@
 #### 2.5.1 我的订单
 
 	top.jsp
-		> 我的购物车，请求OrderServlet?method=myOrder
+		> 我的订单，请求OrderServlet?method=myOrder
 
 	list.jsp
 		> 显示订单
@@ -860,7 +860,6 @@
       * 如果没有，删除该分类；return findAll()
 
   CategoryService && CategoryDao #findChildrenCountByParent()
-    > 略
 
 2. 删除二级分类
   list.jsp
@@ -929,16 +928,17 @@
 	add.jsp
 		> 新书上架 /AdminBookServlet?method=add&各种表单项
 
-	AdminAddBookServlet#method=add
+	AdminAddBookServlet
 		> 使用 commons-fileupload组件完成三步解析，得到List<FileItem>
 		> 把 List<FileItem>转换成为一个Map中
 		> 使用Map生成一个Book，使用Map生成一个Category，把Category赋给Book
+		> 设置book.bid
 		> ----
 		> 对文件名进行截取（文件名称可能是绝对路径）
 		> 对文件拓展名进行校验，如果不是jpg或者png，则保存错误转发到add.jsp
 		> 检测图片大小，如果长宽大于 350*350，则保存错误到request域后转发到add.jsp
 		> 给文件名加上uuid前缀（保证文件名唯一）
-		> 给文件名添加上 book_img路径
+		> 给文件名添加上 book_img路径后保存
 		> 文件名赋给book对象
 		> 使用ServletContext.getRealPath()获取真实路径
 		> 保存文件
@@ -961,14 +961,17 @@
 		> 显示图书详细	
 
 	service && dao
-		> 略
+		> bookService.load() 查找图书详细放入request域（其中包括 book.category 以及 book.category.parent）
+		> bookService.findParents() 查找所有一级分类放入request域
+		> bookService.findChildrenByParent 查找图书当前所属的一级分类的所有二级分类
+
 
 2. 异步响应二级分类
 	desc.jsp
 		> 一级分类下拉框改变，ajax请求 /AdminBookServlet?method=findChildren&pid=xxx
 
 	service && dao #findChildren
-		> 略
+		> findChildrenByParent() 查找某一父分类的所有子分类
 
 3. 提交表单，编辑图书
 	desc.jsp
