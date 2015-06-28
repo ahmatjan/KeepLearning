@@ -18,3 +18,5 @@ bin/
 .tern-project
 Servers/
 classes
+
+.DS_Store

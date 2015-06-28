@@ -118,7 +118,7 @@ $(function() {
 	  </div>
 	</div>
 	<div style="margin: 40px;">
-		<a href="javascript:$('#form1').submit()" class="linkNext">下一步</a>
+		<a href="javascript:void $('#form1').submit()" class="linkNext">下一步</a>
 	</div>
 </div>
 </form>
