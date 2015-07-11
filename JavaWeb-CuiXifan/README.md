@@ -133,7 +133,7 @@
   > EncodingFilter: 对客户端请求进行编码处理
   > VerifyCodeServlet: 生成验证码图片返回给客户端，以及进行验证码的比对
 
-## goods 网上书城
+## day26 goods 网上书城
 
 ### 网上书城功能模块划分
 
