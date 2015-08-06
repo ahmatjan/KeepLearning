@@ -13,8 +13,6 @@ Debug/
 bin/
 .metadata/
 .settings/
-.project
-.classpath
 .tern-project
 Servers/
 classes

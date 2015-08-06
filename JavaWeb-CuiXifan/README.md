@@ -151,3 +151,10 @@
     > day27_2: 注解的使用与定义
     > day27_3: 反射泛型和反射注解，用反射泛型、注解和反射注解实现Hibernate原型。
     > day27_4: 学了BeanFactory以及面向接口编程。
+
+## day28
+    > day28_1: 学习Servlet3.0的 Servlet/Listener/Filter 注解。
+    > day28_2: 学习Servlet3.0的 异步处理。
+    > day28_3: 学习Servlet3.0的上传支持。
+    > day28_4: 学习动态代理 newProxyInstance方法介绍/Waiter案例学习/代理工厂实现。
+    > day28_5: 学习类加载器相关知识。
